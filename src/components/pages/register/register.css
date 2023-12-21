@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap');
+
+*{
+  font-family: 'Lora', serif;
+}
+.register{
+    background-color: #FBF6F0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+.register .card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #FFFFFF;
+    width: 800px;
+    min-height: 500px;
+    border-radius: 30px;
+    padding: 20px;
+}
+.register .title{
+    font-family: 'Lora', serif;
+    font-size: 45px;
+    font-style: italic;
+    font-weight: 700;
+    margin-right: 40px;
+    
+}
+.register p{
+    
+    width: 550px;
+    text-align: center;
+    margin: 18px 0px 20px 0px;
+    font-weight: 550;
+    margin-right: 40px;
+}
+
+.register .input-group {
+    position: relative;
+    margin-top: 30px;
+}
+
+.register input {
+    padding: 10px;
+    border: 2px solid #739072;
+    border-radius: 18px;
+    width: 250px;
+    height: 30px;
+  }
+  .register label {
+    position: absolute;
+    top: 17px;
+    left: 30px;
+    color: #aaa;
+    pointer-events: none;
+    transition: 0.5s ease all;
+  }
+  
+  .register input:focus + label,
+  .register input:not(:placeholder-shown) + label {
+    top: -25px;
+    left:10px;
+    font-size: 20px;
+    color: #000000;
+  }
+  .register .container{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 85%;
+  }
+ .register .nextprev{
+    display: flex;
+    justify-content: space-between;
+    width: 95%;
+    margin-top: -20%;
+ }
+ .register .cntr{
+        margin-top: -25px;
+ }
+ .register .button{
+  width: 250px;
+  height: 50px;
+  background-color: #739072;
+  border-radius: 30px;
+  color: #FFFFFF;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  margin-top: 20px;
+ }
+ .register .button:hover{
+  background-color: #4d604e ;
+ }
+ .register .prev{
+  position: absolute;
+  left: 21%;
+  top: 65%;
+ }
