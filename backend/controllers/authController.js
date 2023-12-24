@@ -2,9 +2,9 @@ const db = require("../config/db")
 const path = require("path")
 const fs = require("fs")
 
-const authController = {
+const authController = {   // i should add languages to learn and learnt languages
   signup: (req, res) => {
-    const sql = "INSERT INTO users (`username`, `email`, `password`, `profilePicture`) VALUES (?)" // i should add here languages to learn and learnt languages
+    const sql = "INSERT INTO users (`username`,`fullName`, `email`, `password`, `profilePicturePath`) VALUES (?)"
     const picture = `${Date.now()}-${req.file.originalname}`
     const picturePath = path.join(__dirname,"../public/profilePictures",picture)
 
@@ -14,7 +14,7 @@ const authController = {
         return res.json({ error: "Error saving profile picture" })
       }
 
-      const values = [req.body.name, req.body.email, req.body.password, `/profilePictures/${picture}`]
+      const values = [req.body.username, req.body.fullname, req.body.email, req.body.password, `/profilePictures/${picture}`]
       db.query(sql, [values], (err, data) => {
         if (err) {
           console.error("Error executing SQL query:", err)
