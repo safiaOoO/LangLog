@@ -1,0 +1,97 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap');
+
+*{
+  font-family: 'Lora', serif;
+}
+.login{
+    background-color: #FBF6F0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+.login .card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #FFFFFF;
+    width: 800px;
+    height: 500px;
+    border-radius: 30px;
+    padding: 20px;
+}
+.login .title{
+    font-family: 'Lora', serif;
+    font-size: 55px;
+    font-style: italic;
+    font-weight: 700;
+    line-height: 70px;
+    letter-spacing: 0em;
+    margin-right: 40px;
+}
+.login form{
+    display: flex;
+    flex-direction: column;
+}
+.login .input-group {
+    position: relative;
+    margin-top: 30px;
+}
+
+.login input {
+    padding: 10px;
+    border: 2px solid #739072;
+    border-radius: 18px;
+    width: 400px;
+    height: 30px;
+  }
+  .login label {
+    position: absolute;
+    top: 17px;
+    left: 30px;
+    color: #aaa;
+    pointer-events: none;
+    transition: 0.5s ease all;
+  }
+  
+  .login input:focus + label,
+  .login input:not(:placeholder-shown) + label {
+    top: -25px;
+    left:10px;
+    font-size: 20px;
+    color: #000000;
+  }
+  .login span{
+    margin: 10px 0px ;
+    margin-left: 35%;
+    color: #575555;
+    cursor: pointer;
+    text-decoration:underline;
+  }
+  .login button{
+    background-color: #739072;
+    width: 425px;
+    height: 50px;
+    border-radius: 18px;
+    border: none;
+    font-family: Lora;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 400;
+    color: #FFFFFF;
+    cursor: pointer;
+  }
+  .login button:hover{
+    background-color: #4d604e ;
+
+  }
+  .login .signup-link{
+    font-family: Lora;
+    font-weight: 400px;
+    font-size: 18px;
+    color: #000000;
+  }
+  .login a{
+    color: #739072;
+  }
