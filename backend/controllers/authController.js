@@ -2,17 +2,21 @@ const db = require("../config/db")
 const path = require("path")
 const fs = require("fs")
 
-const authController = {   // i should add languages to learn and learnt languages
+const authController = { 
   signup: (req, res) => {
     const sql = "INSERT INTO users (`username`,`fullName`, `email`, `password`, `profilePicturePath`) VALUES (?)"
     const picture = `${Date.now()}-${req.file.originalname}`
     const picturePath = path.join(__dirname,"../public/profilePictures",picture)
 
-    const languagesspeak = req.body.languagesspeak
-    const languagestolearn = req.body.languagestolearn
+    const languagesspeak = Array.isArray(req.body.languagesspeak) ? req.body.languagesspeak : [req.body.languagesspeak]
+    const languagestolearn = Array.isArray(req.body.languagestolearn) ? req.body.languagestolearn : [req.body.languagestolearn]
 
-    const sqlToLearn = " INSERT INTO languagestolearn (`idUser`, `codeLanguage`) VALUES (?)" // safia should put the values of the option language.codeLanguage and the language can be the between >lang<
-    const sqlSpeak = " INSERT INTO languagesspeak (`idUser`, `codeLanguage`) VALUES (?)" // safia should put the values of the option language.codeLanguage and the language can be the between >lang<
+    console.log('languagesspeak is', languagesspeak)
+    console.log('#########################################"')
+    console.log('languagestolearn is', languagestolearn)
+
+    const sqlToLearn = " INSERT INTO languagetolearn (`idUser`, `codeLanguage`) VALUES (?)" // safia should put the values of the option language.codeLanguage and the language can be the between >lang<
+    const sqlSpeak = " INSERT INTO languagespeak (`idUser`, `codeLanguage`) VALUES (?)" // safia should put the values of the option language.codeLanguage and the language can be the between >lang<
 
 
     fs.writeFile(picturePath, req.file.buffer,(err)=>{
@@ -27,9 +31,28 @@ const authController = {   // i should add languages to learn and learnt languag
           console.error("Error executing SQL query:", err)
           return res.json({ error: "Error executing SQL query" })
         }
-        // return res.json({ success: true, message: "Success" })     I think i should put this in the end
+        
+        const id = data.insertId
+        const languagesspeakValues = languagesspeak.map(language => [id, language])
+        const languagestolearnValues = languagestolearn.map(language => [id, language])
+        
+        db.query(sqlSpeak,languagesspeakValues,(err)=>{
+          if (err) {
+            console.error("Error inserting languages spoken:", err);
+            return res.json({ error: "Error inserting languages spoken" });
+        }
+        })
+        db.query(sqlToLearn,languagestolearnValues,(err)=>{
+          if (err) {
+            console.error("Error inserting languages spoken:", err);
+            return res.json({ error: "Error inserting languages to learn" });
+        }
+        })
+        
+        return res.json({ success: true, message: "Success",test:`the user with the id ${id} is registered` })
       })
     })
+    
   },
 
   login: (req, res) => {
