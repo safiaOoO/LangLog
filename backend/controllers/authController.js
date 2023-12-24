@@ -8,6 +8,13 @@ const authController = {   // i should add languages to learn and learnt languag
     const picture = `${Date.now()}-${req.file.originalname}`
     const picturePath = path.join(__dirname,"../public/profilePictures",picture)
 
+    const languagesspeak = req.body.languagesspeak
+    const languagestolearn = req.body.languagestolearn
+
+    const sqlToLearn = " INSERT INTO languagestolearn (`idUser`, `codeLanguage`) VALUES (?)" // safia should put the values of the option language.codeLanguage and the language can be the between >lang<
+    const sqlSpeak = " INSERT INTO languagesspeak (`idUser`, `codeLanguage`) VALUES (?)" // safia should put the values of the option language.codeLanguage and the language can be the between >lang<
+
+
     fs.writeFile(picturePath, req.file.buffer,(err)=>{
       if (err){
         console.error("Error saving profile picture:", err)
@@ -20,7 +27,7 @@ const authController = {   // i should add languages to learn and learnt languag
           console.error("Error executing SQL query:", err)
           return res.json({ error: "Error executing SQL query" })
         }
-        return res.json({ success: true, message: "Success" })
+        // return res.json({ success: true, message: "Success" })     I think i should put this in the end
       })
     })
   },
