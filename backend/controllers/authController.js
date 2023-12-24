@@ -11,13 +11,8 @@ const authController = {
     const languagesspeak = Array.isArray(req.body.languagesspeak) ? req.body.languagesspeak : [req.body.languagesspeak]
     const languagestolearn = Array.isArray(req.body.languagestolearn) ? req.body.languagestolearn : [req.body.languagestolearn]
 
-    console.log('languagesspeak is', languagesspeak)
-    console.log('#########################################"')
-    console.log('languagestolearn is', languagestolearn)
-
     const sqlToLearn = " INSERT INTO languagetolearn (`idUser`, `codeLanguage`) VALUES (?)" // safia should put the values of the option language.codeLanguage and the language can be the between >lang<
     const sqlSpeak = " INSERT INTO languagespeak (`idUser`, `codeLanguage`) VALUES (?)" // safia should put the values of the option language.codeLanguage and the language can be the between >lang<
-
 
     fs.writeFile(picturePath, req.file.buffer,(err)=>{
       if (err){
