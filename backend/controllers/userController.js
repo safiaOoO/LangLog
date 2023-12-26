@@ -13,8 +13,6 @@ const userController = {
     const sqlFollow = 'INSERT INTO userfollowers (`idFollower`,`idFollowing`) VALUES (?)'
     const follower = req.session.id
     const following = req.body.user_id
-    console.log(req.session)
-    console.log(req.body)
 
     db.query(sqlFollow, [follower,following], (err)=>{
       if (err) {
@@ -23,10 +21,23 @@ const userController = {
       }
     })
     return res.json({ success: true, message: "Success",test:`the user with the id ${follower} is following the user with the id ${following}` })
+  },
+
+  unfollowUser: (req,res) =>{ //post
+    const sqlUnFollow = 'DELETE FROM userfollowers WHERE idFollower = ? AND idFollowing = ?'
+    const follower = req.session.id
+    const following = req.body.user_id
+
+    db.query(sqlUnFollow, [follower, following], (err) => {
+        if (err) {
+            console.error("Error unfollowing user:", err);
+            res.json({ success: false, message: "Internal server error" });
+        } else {
+            res.json({ success: true, message: `Successfully ${follower} unfollowed ${following}` });
+        }
+    })
   }
 }
-
-// i should add here follow and unfollow user
 
 
 module.exports = userController
