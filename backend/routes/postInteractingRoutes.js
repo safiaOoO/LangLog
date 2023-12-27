@@ -9,6 +9,6 @@ router.post("/replyComment", postInteractingController.replyComment)
 router.post("/commentLike", postInteractingController.commentLike)
 router.post("/replyLike", postInteractingController.replyLike)
 router.post("/savePost", postInteractingController.savePost)
-router.post("/unsavePost", postInteractingController.ynsavePost)
+router.post("/unsavePost", postInteractingController.unsavePost)
 
 module.exports = router
