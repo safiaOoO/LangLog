@@ -5,8 +5,11 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
+const postRoutes = require("./routes/postRoutes")
 
 const PORT = process.env.PORT || 8081;
 
@@ -15,6 +18,7 @@ app.use(cors({
   methods: ["POST", "GET"],
   credentials: true,
 }))
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -31,6 +35,7 @@ app.use(session({
 
 app.use("/auth", authRoutes)
 app.use("/user", userRoutes)
+app.use("/post", postRoutes)
 
 
 app.listen(PORT, () => {
