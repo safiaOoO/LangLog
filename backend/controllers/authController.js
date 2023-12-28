@@ -5,20 +5,20 @@ const fs = require("fs")
 const authController = { 
   signup: (req, res) => {
     const sql = "INSERT INTO users (`username`,`fullName`, `email`, `password`, `profilePicturePath`) VALUES (?)"
-    
-    const picture = `${Date.now()}-${req.file.originalname}` // safia has to put the value of the picture the path to the default pic if it doesn't work i make a function that add the default-pic if the user don't enter a pic
+    const userData = req.updatedUserData
+    const picture = `${Date.now()}-${userData.originalname}` // safia has to put the value of the picture the path to the default pic if it doesn't work i make a function that add the default-pic if the user don't enter a pic
     const picturePath = path.join(__dirname,"../public/profilePictures",picture)
 
-    const languagesspeak = Array.isArray(req.body.languagesspeak) ? req.body.languagesspeak : [req.body.languagesspeak]
-    const languagestolearn = Array.isArray(req.body.languagestolearn) ? req.body.languagestolearn : [req.body.languagestolearn]
+    const languagesspeak = userData.languagesspeak
+    const languagestolearn = userData.languagestolearn
 
     const sqlToLearn = " INSERT INTO languagetolearn (`idUser`, `codeLanguage`) VALUES (?)" // safia should put the values of the option language.codeLanguage and the language can be the between >lang<
     const sqlSpeak = " INSERT INTO languagespeak (`idUser`, `codeLanguage`) VALUES (?)" // safia should put the values of the option language.codeLanguage and the language can be the between >lang<
 
-    const values = [req.body.username, req.body.fullname, req.body.email, req.body.password,`/profilePictures/${picture}`]
+    const values = [userData.username, userData.fullname, userData.email, userData.password,`/profilePictures/${picture}`]
 
-    if (req.file.originalname != 'defaultProfilePicture.png'){
-      fs.writeFile(picturePath, req.file.buffer,(err)=>{
+    if (userData.picture.originalname != 'defaultProfilePicture.png'){
+      fs.writeFile(picturePath, userData.picture.buffer,(err)=>{
         if (err){
           console.error("Error saving profile picture:", err)
           return res.json({ error: "Error saving profile picture" })
