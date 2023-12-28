@@ -1,12 +1,14 @@
 const db = require("../config/db")
 const path = require("path")
 const fs = require("fs")
+const { dataUriToBuffer } = require ('data-uri-to-buffer')
 
 const authController = { 
   signup: (req, res) => {
     const sql = "INSERT INTO users (`username`,`fullName`, `email`, `password`, `profilePicturePath`) VALUES (?)"
-    const userData = req.updatedUserData
-    const picture = `${Date.now()}-${userData.originalname}` // safia has to put the value of the picture the path to the default pic if it doesn't work i make a function that add the default-pic if the user don't enter a pic
+    const userData = req.body
+
+    const picture = `${Date.now()}-${userData.pictureName}` // safia has to put the value of the picture the path to the default pic if it doesn't work i make a function that add the default-pic if the user don't enter a pic
     const picturePath = path.join(__dirname,"../public/profilePictures",picture)
 
     const languagesspeak = userData.languagesspeak
@@ -17,12 +19,16 @@ const authController = {
 
     const values = [userData.username, userData.fullname, userData.email, userData.password,`/profilePictures/${picture}`]
 
-    if (userData.picture.originalname != 'defaultProfilePicture.png'){
-      fs.writeFile(picturePath, userData.picture.buffer,(err)=>{
+    const parsed = Buffer.from((dataUriToBuffer(req.body.picture).buffer))
+    console.log(parsed)
+
+    if (userData.pictureName != 'defaultProfilePicture.png'){
+      fs.writeFile(picturePath, parsed,(err)=>{
         if (err){
           console.error("Error saving profile picture:", err)
           return res.json({ error: "Error saving profile picture" })
         }
+        console.log("Profile picture saved successfully")
       })
     }
 
@@ -32,9 +38,9 @@ const authController = {
         return res.json({ error: "Error inserting the user" })
       }
       const id = data.insertId
+      console.log(id)
       const languagesspeakValues = languagesspeak.map(language => [id, language])
       const languagestolearnValues = languagestolearn.map(language => [id, language])
-      
       db.query(sqlSpeak,languagesspeakValues,(err)=>{
         if (err) {
           console.error("Error inserting languages spoken:", err)
