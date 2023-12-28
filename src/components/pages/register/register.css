@@ -68,6 +68,7 @@
   .register .container{
     display: flex;
     justify-content: space-evenly;
+    flex-direction: row;
     align-items: center;
     width: 85%;
   }

@@ -11,7 +11,7 @@ const ProfilePictureUpload = ({ onChange }) => {
       reader.onloadend = () => {
         const selectedImage = reader.result;
         setSelectedImage(selectedImage);
-        onChange(selectedImage); 
+        onChange(selectedImage,file); 
       };
       reader.readAsDataURL(file);
     }

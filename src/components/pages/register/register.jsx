@@ -25,8 +25,8 @@ const Register = () => {
   const [selectedLanguagesToLearn, setSelectedLanguagesToLearn] = useState([]);
   const [selectedMotherTongues, setSelectedMotherTongues] = useState([]);
 
-  const handleImageChange = (selectedImage) => {
-    setUserData((prevData) => ({ ...prevData, picture: selectedImage }));
+  const handleImageChange = (selectedImage,file) => {
+    setUserData((prevData) => ({ ...prevData, picture: selectedImage ,pictureName: file.name }));
   };
 
   const handleChange = (e) => {
