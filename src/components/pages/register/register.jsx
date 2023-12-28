@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ProfilePictureUpload from './profilepicture';
 import { Fab } from '@mui/material';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import "./register.css"
 import LanguageSelector from "./language"
-
+import axios from 'axios';
+import { Navigate } from 'react-router-dom';
 const Register = () => {
+  
+  
   const [step, setStep] = useState(1);
   const [userData, setUserData] = useState({
     fullname: '',
@@ -15,11 +18,12 @@ const Register = () => {
     email: '',
     password: '',
     confirmPassword: '',
-    languageToLearn: '',
-    motherTongue: '',
+    languagestolearn: [],
+    languagesspeak: [],
   });
   const [passwordError, setPasswordError] = useState(false);
-
+  const [selectedLanguagesToLearn, setSelectedLanguagesToLearn] = useState([]);
+  const [selectedMotherTongues, setSelectedMotherTongues] = useState([]);
 
   const handleImageChange = (selectedImage) => {
     setUserData((prevData) => ({ ...prevData, picture: selectedImage }));
@@ -45,9 +49,20 @@ const Register = () => {
   };
 
   const handleSave = () => {
-    console.log(userData);
+    const updatedUserData = {
+      ...userData,
+      languagestolearn: selectedLanguagesToLearn,
+      languagesspeak: selectedMotherTongues,
+    };
+    axios.post('http://localhost:8081/auth/signup', updatedUserData)
+    .then(res => {
+      console.log(res.data)})
+    .catch(error => {
+      console.error('Error:', error);
+    });
   };
 
+  
   return (
     <div className='register'>
       {step === 1 && (
@@ -150,9 +165,17 @@ const Register = () => {
           <p>LangLog is a platform where you can practice your Target language(s) 
             and also lend a helping hand to people learning your language</p>
           <h5>Choose your Target Language(s): </h5>  
-          <LanguageSelector className='select'/>  
+          <LanguageSelector 
+          name="languagestolearn"
+          selectedLanguages={selectedLanguagesToLearn}
+          setSelectedLanguages={setSelectedLanguagesToLearn}
+          />  
           <h5>Choose the Language(s) that you speak: </h5>  
-          <LanguageSelector/> 
+          <LanguageSelector
+          name="languagesspeak"
+          selectedLanguages={selectedMotherTongues}
+          setSelectedLanguages={setSelectedMotherTongues}
+          /> 
           <button className='button' onClick={handleSave}>sign up</button>
           <div className="prev">
           <Fab sx={{backgroundColor:"#739072",width:"50px",height:"50px",color:"white"}} onClick={handlePrevious} >

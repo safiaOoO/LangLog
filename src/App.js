@@ -3,6 +3,7 @@ import Loading from './components/loading';
 import Login from './components/pages/login/login';
 import Register from './components/pages/register/register';
 import Home from './components/pages/home/home';
+import Postspage from './components/pages/postspage/postspage';
 import {
   createBrowserRouter,
   Navigate,
@@ -25,13 +26,17 @@ function App(){
       path: "/register",
       element: <Register/>,
      },
+     {
+      path: "/postspage",
+      element: <Postspage/>,
+     },
   ]);
 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const Data = async () => {
-      await new Promise((resolve) => setTimeout(resolve, 3000));
+      await new Promise((resolve) => setTimeout(resolve, 0));
       setLoading(false);
     };
 
