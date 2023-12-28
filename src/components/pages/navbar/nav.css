@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap');
+
+.navbar{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.nav{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #739072;
+    font-family: 'Lora', serif;
+    width: 70%;
+    height: 60px;
+    border-radius: 60px;
+}
+.nav .title{
+    color: #FFFFFF;
+    font-size: 20px;
+    font-style: italic;
+    cursor: pointer;
+}

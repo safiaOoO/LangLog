@@ -1,23 +1,31 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+const LanguageSelector = ({ selectedLanguages, setSelectedLanguages }) => {
+  
+  const [languages, setLanguages] = useState([]);
+  useEffect(()=>{
+    axios.get('http://localhost:8081/languages')
+    .then(res=>{const fetchedLanguages = res.data;
+      setLanguages(fetchedLanguages);
+      setAvailableLanguages(fetchedLanguages);})
+    .catch(err=>console.log(err))
+  },[])
+  const [availableLanguages, setAvailableLanguages] = useState([]);
+  
 
-const LanguageSelector = () => {
-  const [selectedLanguages, setSelectedLanguages] = useState([]);
-  const [availableLanguages, setAvailableLanguages] = useState([
-    'English', 'Spanish', 'French', 'German', 
-  ]);
   const [selectedLanguage, setSelectedLanguage] = useState('');
 
   const handleLanguageChange = (event) => {
     const newSelectedLanguage = event.target.value;
     if (newSelectedLanguage && !selectedLanguages.includes(newSelectedLanguage)) {
-      setSelectedLanguages([...selectedLanguages, newSelectedLanguage]);
+      setSelectedLanguages((prevLanguages) => [...prevLanguages, newSelectedLanguage]);
       setAvailableLanguages(availableLanguages.filter(lang => lang !== newSelectedLanguage));
       setSelectedLanguage(''); 
     }
   };
 
   const handleRemoveLanguage = (language) => {
-    setSelectedLanguages(selectedLanguages.filter(lang => lang !== language));
+    setSelectedLanguages((prevLanguages) => prevLanguages.filter(lang => lang !== language));
     setAvailableLanguages([...availableLanguages, language]);
   };
 
@@ -34,8 +42,8 @@ const LanguageSelector = () => {
                     height: '50px',
                     }}>
           <option value="" disabled>Select Language</option>
-          {availableLanguages.map(lang => (
-            <option key={lang} value={lang}>{lang}</option>
+          {languages.map(lang => (
+            <option key={lang.codeLanguage} value={lang.codeLanguage}>{lang.languageName}</option>
           ))}
         </select>
       </div>
@@ -52,7 +60,7 @@ const LanguageSelector = () => {
                                   border: '',
                                   marginTop:'5px',
                                 }}>
-            <span style={{color:'#3A4D39', fontSize:'14px'}}>{lang}</span>
+            <span style={{color:'#3A4D39', fontSize:'14px'}}>{lang.languageName}</span>
             <button onClick={() => handleRemoveLanguage(lang)} style={{
                                                                         borderRadius:'50%',
                                                                         backgroundColor:'#ffffff',
