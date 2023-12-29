@@ -21,17 +21,7 @@ body{
     align-items: center;
     padding-top: 20px;
 }
-.post .first button{
-    background-color: #FFFFFF;
-    border-radius: 30px;
-    border: solid 2px #739072;
-    width: 50%;
-    cursor: pointer;
-    margin-top: 5%;
-}
-.post .first button:hover{
-    background-color:#739072 ;
-}
+
           
 .post .tag-icon{
     display: flex;

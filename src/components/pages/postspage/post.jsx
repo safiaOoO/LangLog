@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMessage } from '@fortawesome/free-regular-svg-icons';
 import { faBookmark } from '@fortawesome/free-regular-svg-icons';
 import Save from './save';
+import Follow from './follow';
 const Post = () => {
     const [username, setUsername] = useState('User Name');
     const navigate = useNavigate();
@@ -19,7 +20,7 @@ const Post = () => {
         <div className='first'>
             <ProfilePic/>
             <div>{username}</div>
-            <button>Follow</button>
+            <Follow/>
         </div>
         <div className="second">
             <div className="postcontent" onClick={handlepostpage}>
