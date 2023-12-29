@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap');
+*{
+    font-family: 'Lora', serif;
+}
+body{
+    background-color: #FBF6F0;
+}
+.postform{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.postform form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 30px;
+    background: rgba(236, 227, 206, 0.50);
+    width: 800px;
+    height: 900px;
+    margin: 50px 0 80px 0 ;
+}
+.postform h1{
+    width: 670px;
+}
+.postform .input-group {
+    position: relative;
+    margin-top: 30px;
+}
+
+.postform .input-group .title{
+    padding: 5px 20px;
+    border: 2px solid #739072;
+    border-radius: 30px;
+    width: 650px;
+    height: 30px;
+  }
+  .postform .input-group .description{
+    padding: 5px 20px;
+    border: 2px solid #739072;
+    border-radius: 30px;
+    width: 650px;
+    height: 100px;
+  }
+  .postform .input-group .content{
+    padding: 5px 20px;
+    border: 2px solid #739072;
+    border-radius: 30px;
+    width: 650px;
+    height: 200px;
+  }
+  .postform .input-group label {
+    position: absolute;
+    top: 10px;
+    left: 30px;
+    color: #aaa;
+    pointer-events: none;
+    transition: 0.5s ease all;
+  }
+  
+  .postform input:focus + label,
+  .postform input:not(:placeholder-shown) + label {
+    top: -25px;
+    left:20px;
+    font-size: 18px;
+    color: #000000;
+  }
+  .postform select{
+    width: 690px;
+    padding: 10px;
+    border: 2px solid #739072;
+    border-radius: 18px;
+    height: 40px;
+    margin-top: 20px;
+  }
+  .postform button{
+    background-color: #739072;
+    width: 100px;
+    height: 40px;
+    border-radius: 30px;
+    border: none;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 400;
+    color: #FFFFFF;
+    cursor: pointer;
+    margin: 50px 0 0 580px;
+  }
+  
+  
+  .postform button:hover{
+    background-color: #4d604e ;
+  }

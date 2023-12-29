@@ -4,6 +4,7 @@
 *{
   font-family: 'Lora', serif;
 }
+
 .login{
     background-color: #FBF6F0;
     display: flex;
@@ -54,7 +55,7 @@
     pointer-events: none;
     transition: 0.5s ease all;
   }
-  
+
   .login input:focus + label,
   .login input:not(:placeholder-shown) + label {
     top: -25px;
