@@ -1,6 +1,42 @@
 const db = require("../config/db")
 const path = require("path")
 const fs = require('fs')
+const getUserLanguages = async (userId) => {
+    const speakQuery = 'SELECT codeLanguage FROM languagespeak WHERE idUser = ?'
+    const learnQuery = 'SELECT codeLanguage FROM languagetolearn WHERE idUser = ?'
+  
+    const [speakResult] = await db.query(speakQuery, [userId])
+    const [learnResult] = await db.query(learnQuery, [userId])
+  
+    const spokenLanguages = speakResult.map(row => row.codeLanguage)
+    const learningLanguages = learnResult.map(row => row.codeLanguage)
+  
+    return { spokenLanguages, learningLanguages }
+}
+
+const getPostsByLanguages = async (userId) => {
+    const { spokenLanguages, learningLanguages } = await getUserLanguages(userId);
+  
+    const spokenPostsQuery = `
+      SELECT *
+      FROM post
+      WHERE codeLanguage IN (?)
+    `;
+  
+    const [spokenPosts] = await db.query(spokenPostsQuery, [spokenLanguages]);
+
+    const learningPostsQuery = `
+      SELECT *
+      FROM post
+      WHERE codeLanguage IN (?)
+    `;
+  
+    const [learningPosts] = await db.query(learningPostsQuery, [learningLanguages]);
+
+    const allPosts = [...spokenPosts, ...learningPosts];
+  
+    return allPosts;
+}
  
 const postController = {
     createPost: async (req, res) => {
@@ -75,40 +111,37 @@ const postController = {
         }
     },
 
-    getUserPosts: async (req, res) => {
+    getUserPostPage: async (req, res) => {
         try {
-            const userId = req.session.idUser
-            const sql = 'SELECT * FROM post WHERE idPost = ?'
-            const result = await db.query(sql, [userId]) 
+            const userId = req.session.idUser; 
+            const userLanguages = await getUserLanguages(userId); 
+            const posts = await getPostsByLanguages(userLanguages);
+            
+            res.json(posts);
 
-            const response = {
-                affectedRows: result.affectedRows,
-                insertId: result.insertId,
-                message: 'Posts retrieved successfully'
-            }
-            res.status(201).json (response)
         } catch (error){
-            console.log(error)
-            res.status(500).json({message : 'Retrieve Failed'})
+            console.error('Error fetching posts:', error);
+            res.status(500).json({ error: 'Internal Server Error' });
         }
     },
 
-    getPosts: async (req, res) => {
+    getUserPost: async (req, res) => {
         try {
-            const sql = 'SELECT * FROM post ORDER BY RAND() LIMIT 100'
-            const result = await db.query(sql)
+            const userId = req.session.idUser
+            const sql = 'SELECT * FROM post WHERE idUser = ? '
+            const posts = await db.query(sql, [userId])
 
-            const response = {
-                affectedRows: result.affectedRows,
-                insertId: result.insertId,
-                message: 'Posts retrieved successfully'
-            }
-            res.status(201).json (response)
-        } catch(error) {
-            console.log(error)
-            res.status(500).json({message : ''})
+            res.json(posts)
+            
+        }catch (error) {
+            console.error('Error fetching posts:', error);
+            res.status(500).json({ error: 'Internal Server Error' });
         }
-    }, 
+    },
+
+    getPostInfo: async (req, res) => {
+
+    },
 
     searchByFilter: async (req, res) => {
         try {
@@ -125,14 +158,6 @@ const postController = {
         }catch(error) {
             console.log(error)
             res.status(500).json({message: ''})
-        }
-    },
-
-    getpost : async (req, res) => {
-        try{
-
-        }catch(error) {
-
         }
     }
 }

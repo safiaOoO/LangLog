@@ -1,11 +1,13 @@
 const express = require('express')
 const router = express.Router()
 const PostController = require('../controllers/postController')
+const postController = require('../controllers/postController')
 
 
-router.post('/createPosts', PostController.createPost)
-router.delete('/posts/:id', PostController.deletePost)
-router.put('/posts/:id', PostController.editPost)
-router.get('/:idUser/myPosts', PostController.getUserPosts)
-
+router.post('/api/createPosts', PostController.createPost)
+router.delete('/api/posts/:idPost', PostController.deletePost)
+router.put('/api/posts/:idPost', PostController.editPost)
+router.get('/api/:idUser/myPosts', PostController.getUserPost)
+router.get('/api/:idUser/postsPage', PostController.getUserPostPage)
+router.get('/api/:idPost', postController.getPostInfo)
 module.exports = router
