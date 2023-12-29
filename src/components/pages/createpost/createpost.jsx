@@ -4,26 +4,10 @@ import "./createpost.css"
 import { useState,useEffect } from "react";
 import axios from 'axios';
 import Addpicture from "./addpicture";
-const Postform = ({ selectedLanguages, setSelectedLanguages }) => {
+import LanguageSelector from "../register/language"
 
-    const [languages, setLanguages] = useState([]);
-  useEffect(()=>{
-    axios.get('http://localhost:8081/languages')
-    .then(res=>{const fetchedLanguages = res.data;
-      setLanguages(fetchedLanguages);
-      })
-    .catch(err=>console.log(err))
-  },[])
-  const [selectedLanguage, setSelectedLanguage] = useState('');
-
-  const handleLanguageChange = (event) => {
-    const newSelectedLanguage = event.target.value;
-    if (newSelectedLanguage && !selectedLanguages.includes(newSelectedLanguage)) {
-      setSelectedLanguages((prevLanguages) => [...prevLanguages, newSelectedLanguage]);
-      setSelectedLanguage(''); 
-    }
-  };
-
+const Postform = () => {
+  const [selectedLanguage, setSelectedLanguage] = useState([]);
     const [formData, setFormData] = useState({
         title: '',
         description: '',
@@ -86,12 +70,12 @@ const Postform = ({ selectedLanguages, setSelectedLanguages }) => {
                         <label>Brief Description</label>
                     </div>
 
-                    <select value={selectedLanguage} onChange={handleLanguageChange}>
-                    <option value="" disabled>Select Language</option>
-                    {languages.map(lang => (
-                        <option key={lang.codeLanguage} value={lang.languageName}>{lang.languageName}</option>
-                    ))}
-                    </select>
+                    <LanguageSelector
+                    pageType="page2"
+                    name="language"
+                    selectedLanguages={selectedLanguage}
+                    setSelectedLanguages={setSelectedLanguage}
+                    />
                     <select name="postType" value={formData.postType} onChange={handleChange}>
                     <option value="" disabled>Select Type of Post</option>
                     <option value="essay">Essay</option>

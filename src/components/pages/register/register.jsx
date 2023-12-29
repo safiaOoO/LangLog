@@ -166,12 +166,14 @@ const Register = () => {
             and also lend a helping hand to people learning your language</p>
           <h5>Choose your Target Language(s): </h5>  
           <LanguageSelector 
+          pageType="page1"
           name="languagestolearn"
           selectedLanguages={selectedLanguagesToLearn}
           setSelectedLanguages={setSelectedLanguagesToLearn}
           />  
           <h5>Choose the Language(s) that you speak: </h5>  
           <LanguageSelector
+          pageType="page1"
           name="languagesspeak"
           selectedLanguages={selectedMotherTongues}
           setSelectedLanguages={setSelectedMotherTongues}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
-const LanguageSelector = ({ selectedLanguages, setSelectedLanguages }) => {
+import "./language.css"
+const LanguageSelector = ({ selectedLanguages, setSelectedLanguages, pageType  }) => {
   const [languages, setLanguages] = useState([]);
   const [availableLanguages, setAvailableLanguages] = useState([]);
   const [selectedLanguage, setSelectedLanguage] = useState('');
@@ -38,13 +38,7 @@ const LanguageSelector = ({ selectedLanguages, setSelectedLanguages }) => {
         <select
           value={selectedLanguage}
           onChange={handleLanguageChange}
-          style={{
-            width: '250px',
-            padding: '10px',
-            border: '2px solid #739072',
-            borderRadius: '18px',
-            height: '50px',
-          }}
+          className={`select ${pageType === 'page1' ? 'page1-style' : 'page2-style'}`}
         >
           <option value="" disabled>Select Language</option>
           {languages.map(lang => (
