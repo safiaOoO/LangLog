@@ -1,17 +1,17 @@
 const db = require("../config/db")
 
 const userController = {
-  getUser: (req, res) => {  // get
-    if (req.session.username) {
-      return res.json({ valid: true, username: req.session.username })
-    } else {
-      return res.json({ valid: false })
-    }
+  checkUser: (req,res) => {
+    if(req.session.userID){
+      return res.json({valid:true})
+    }else{
+      return res.json({valid:false})
+  }
   },
 
   followUser: (req,res)=>{ // post
     const sqlFollow = 'INSERT INTO userfollowers (`idFollower`,`idFollowing`) VALUES (?)'
-    const follower = req.session.id
+    const follower = req.session.userID
     const following = req.body.user_id
 
     db.query(sqlFollow, [follower,following], (err)=>{
@@ -25,7 +25,7 @@ const userController = {
 
   unfollowUser: (req,res) =>{ //post
     const sqlUnFollow = 'DELETE FROM userfollowers WHERE idFollower = ? AND idFollowing = ?'
-    const follower = req.session.id
+    const follower = req.session.userID
     const following = req.body.user_id
 
     db.query(sqlUnFollow, [follower, following], (err) => {

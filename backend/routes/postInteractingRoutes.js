@@ -1,14 +1,14 @@
-const express = require("express")
-const postInteractingController = require("../controllers/postInteractingController")
-
+const express = require('express')
 const router = express.Router()
+const postInteractingController = require('../controllers/postInteractingController')
 
-router.post("/postComment", postInteractingController.postComment)
-router.post("/postLike", postInteractingController.postLike)
-router.post("/replyComment", postInteractingController.replyComment)
-router.post("/commentLike", postInteractingController.commentLike)
-router.post("/replyLike", postInteractingController.replyLike)
-router.post("/savePost", postInteractingController.savePost)
-router.post("/unsavePost", postInteractingController.unsavePost)
+router.post('/:postId/comment', postInteractingController.addComment)
+router.post('/:postId/like', postInteractingController.likePost)
+router.post('/:postId/unlike', postInteractingController.unlikePost)
+router.post('/:postId/save', postInteractingController.savePost)
+router.post('/:postId/unsave', postInteractingController.unsavePost)
+router.post('/:postId/comments', postInteractingController.getComments)
+
+
 
 module.exports = router

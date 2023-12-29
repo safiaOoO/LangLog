@@ -7,8 +7,11 @@ const bodyParser = require("body-parser")
 const app = express()
 const authRoutes = require("./routes/authRoutes")
 const userRoutes = require("./routes/userRoutes")
-const postInteractingRoutes = require("./routes/postInteractingRoutes")
 const languagesRoutes = require("./routes/languagesRoutes")
+const postInteractingRoutes = require("./routes/postInteractingRoutes")
+const commentRoutes = require("./routes/commentRoutes")
+const replyRoutes = require('./routes/replyRoutes')
+
 
 const PORT = process.env.PORT || 8081;
 
@@ -26,7 +29,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(session({
   secret: 'secret',
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false, // if it was true i will always get a cookie whenever i type anything
   cookie: {
     secure: false, // it was false 
     maxAge: 1000 * 60 * 60 * 24, // the session will expire in 24h
@@ -36,8 +39,11 @@ app.use(session({
 
 app.use("/auth", authRoutes)
 app.use("/user", userRoutes)
-app.use("/", postInteractingRoutes)
 app.use("/languages", languagesRoutes)
+app.use('/posts', postInteractingRoutes)
+app.use('/comments', commentRoutes);
+app.use('/replies', replyRoutes);
+
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`)

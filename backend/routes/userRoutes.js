@@ -3,7 +3,7 @@ const userController = require("../controllers/userController")
 
 const router = express.Router()
 
-router.get("/getUser", userController.getUser)
+router.get('/', userController.checkUser)
 router.post("/followUser", userController.followUser)
 router.post("/unfollowUser", userController.unfollowUser)
 

@@ -60,7 +60,6 @@ const authController = {
   login: (req, res) => {
     const sql = `SELECT * FROM users WHERE email = ? AND password = ?`
     const values = [req.body.email, req.body.password]
-    console.log("body : ",req.body)
 
     db.query(sql, values, (err, data) => {
       if (err) {
@@ -70,20 +69,34 @@ const authController = {
       
       if (data.length > 0) {
         req.session.username = data[0].username
-        req.session.id = data[0].idUser
+        req.session.userID = data[0].idUser
         res.cookie('testCookie', 'testValue', { sameSite: 'None', secure: false }) // secure can be false when just testing
-        
+        console.log(req.session.userID)
         return res.json({ Login: true })
+
       } else {
-        return res.json({ Login: false })
+        const sqlEmail = `SELECT * FROM users WHERE email = ?`
+        db.query(sqlEmail,req.body.email,(err,data)=>{
+          if (err) {
+            console.error("Error executing SQL query:", err)
+            return res.status(500).json({ error: "Internal Server Error" })
+          }
+          if(data.length > 0){
+            return res.json({ Login: false, password:true })
+          }else{
+            return res.json({ Login: false })
+          }
+        })
       }
+
     })
   },
 
   logout: (req, res) => {
-    if (req.session.username) {
+    console.log(req.session.userID)
+    if (req.session.userID) {
+      res.clearCookie("connect.sid", { secure: true });
       req.session.destroy()
-      res.clearCookie("connect.sid")
       res.status(200).json({ message: "Logout successful" })
     } else {
       res.status(401).json({ error: "User not logged in" })

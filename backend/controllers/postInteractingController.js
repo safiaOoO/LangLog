@@ -1,9 +1,9 @@
 const db = require("../config/db")
 
 const postInteractingController = {
-    postComment : (req,res) => {
-        const user = req.session.id 
-        const post = req.body.postID // safia has to put the postID as a name in one of the input of
+    addComment : (req, res) => {
+        const user = req.session.userID 
+        const post = req.params.postId
         const comment = req.body.comment
         const values = [post,user,comment]
         const sqlComment = 'INSERT INTO postcomments (`idPost`,`idUser`,`comment`) VALUES ? '
@@ -16,10 +16,10 @@ const postInteractingController = {
             return res.json({ success: true, message: 'Comment added successfully' })
         })
     },
-
-    postLike : (req,res) => {
-        const user = req.session.id 
-        const post = req.body.postID
+      
+    likePost : (req, res) => {
+        const user = req.session.userID 
+        const post = req.params.postId
         const values = [post,user]
         const sqlLike = 'INSERT INTO postlikes (`idPost`,`idUser`) VALUES ? '
 
@@ -32,55 +32,25 @@ const postInteractingController = {
         })
     },
 
-    replyComment : (req,res) => {
-        const user = req.session.id 
-        const comment = req.body.commentID
-        const reply = req.body.reply
-        const values = [comment,user,reply]
-        const sqlReply = 'INSERT INTO replytocomment (`idComment`,`idUser`,`replyText`) VALUES ? '
+    unlikePost : (req,res) =>{
+        const user = req.session.userID 
+        const post = req.params.postId 
+        const values = [post,user]
+        const sqlUnlike = 'DELETE FROM postlikes (`idPost`,`idUser`) VALUES ?'
 
-        db.query(sqlReply,values,(err)=>{
-            if(err){
-                console.error('Error inserting reply:', err)
-                return res.json({ error: 'Error inserting reply' })
+        db.query(sqlUnlike,values,(err)=>{
+            if (err){
+                console.error('Error deleting the like:', err)
+                return res.json({ error: 'Error deleting the like' })
             }
-            return res.json({ success: true, message: 'Reply added successfully' })
+            return res.json({ success: true, message: 'The like deleted successfully' })
         })
     },
 
-    commentLike : (req,res) => {
-        const user = req.session.id 
-        const comment = req.body.commentID // the name of the comments needs to be commentID and it's value needs to be the id of the comment
-        const values = [comment,user]
-        const sqlLike = 'INSERT INTO commentlikes (`idComment`,`idUser`) VALUES ? '
-
-        db.query(sqlLike,values,(err)=>{
-            if(err){
-                console.error('Error inserting the like:', err)
-                return res.json({ error: 'Error inserting the like' })
-            }
-            return res.json({ success: true, message: 'The like added successfully' })
-        })
-    },
-
-    replyLike : (req,res) => {
-        const user = req.session.id 
-        const reply = req.body.replyID // the name of the replies needs to be replyID and it's value needs to be the id of the reply
-        const values = [reply,user]
-        const sqlLike = 'INSERT INTO commentlikes (`idReply`,`idUser`) VALUES ? '
-
-        db.query(sqlLike,values,(err)=>{
-            if(err){
-                console.error('Error inserting the like:', err)
-                return res.json({ error: 'Error inserting the like' })
-            }
-            return res.json({ success: true, message: 'The like added successfully' })
-        })
-    },
-
+      
     savePost: (req,res)=>{
-        const user = req.session.id 
-        const post = req.body.postID // safia has to put the postID as a name in one of the input of
+        const user = req.session.userID 
+        const post = req.params.postId 
         const values = [post,user]
         const sqlSave = 'INSERT INTO postsaved (`idPost`,`idUser`) VALUES ? '
 
@@ -94,8 +64,8 @@ const postInteractingController = {
     },
 
     unsavePost: (req,res)=>{
-        const user = req.session.id 
-        const post = req.body.postID // safia has to put the postID as a name in one of the input of
+        const user = req.session.userID 
+        const post = req.params.postId 
         const values = [post,user]
         const sqlSave = `DELETE FROM postsaved where idPost = ${post} and idUser = ${user} `
 
@@ -106,8 +76,21 @@ const postInteractingController = {
             }
             return res.json({ success: true, message: 'Unsaving done successfully' })
         })
-    }
+    },
 
+    getComments : (req,res) => {
+        const post = req.params.postId
+        const sqlComments = `SELECT * FROM comments WHERE idPost = ${post}`
+
+        db.query(sqlComments,(err,data)=>{
+            if(err){
+                console.error('Error getting comments:', err)
+                return res.json({ error: 'Error getting comments' })
+            }
+            return res.json({ success: true, comments: data })
+        })
+    }
 }
+
 
 module.exports = postInteractingController
