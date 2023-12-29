@@ -43,7 +43,7 @@ const LanguageSelector = ({ selectedLanguages, setSelectedLanguages }) => {
                     }}>
           <option value="" disabled>Select Language</option>
           {languages.map(lang => (
-            <option key={lang.codeLanguage} value={lang.codeLanguage}>{lang.languageName}</option>
+            <option key={lang.codeLanguage} value={lang.languageName}>{lang.languageName}</option>
           ))}
         </select>
       </div>
@@ -60,7 +60,7 @@ const LanguageSelector = ({ selectedLanguages, setSelectedLanguages }) => {
                                   border: '',
                                   marginTop:'5px',
                                 }}>
-            <span style={{color:'#3A4D39', fontSize:'14px'}}>{lang.languageName}</span>
+            <span style={{color:'#3A4D39', fontSize:'14px'}}>{lang}</span>
             <button onClick={() => handleRemoveLanguage(lang)} style={{
                                                                         borderRadius:'50%',
                                                                         backgroundColor:'#ffffff',

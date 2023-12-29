@@ -4,6 +4,7 @@ import Login from './components/pages/login/login';
 import Register from './components/pages/register/register';
 import Home from './components/pages/home/home';
 import Postspage from './components/pages/postspage/postspage';
+import Postcontent from './components/pages/Post content page/postcontent';
 import {
   createBrowserRouter,
   Navigate,
@@ -30,6 +31,11 @@ function App(){
       path: "/postspage",
       element: <Postspage/>,
      },
+     {
+      path: "/postcontent",
+      element: <Postcontent/>,
+     },
+     
   ]);
 
   const [loading, setLoading] = useState(true);

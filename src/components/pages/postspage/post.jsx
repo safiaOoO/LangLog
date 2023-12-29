@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Heart from './heart';
+import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 import "./post.css"
 import { ProfilePic } from '../navbar/nav';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,16 +9,19 @@ import { faMessage } from '@fortawesome/free-regular-svg-icons';
 import { faBookmark } from '@fortawesome/free-regular-svg-icons';
 const Post = () => {
     const [username, setUsername] = useState('User Name');
-
+    const navigate = useNavigate();
+    const handlepostpage = () => {
+        navigate('/postcontent');
+      };
   return (
-    <div className='post'>
+    <div className='post' >
         <div className='first'>
             <ProfilePic/>
             <div>{username}</div>
             <button>Follow</button>
         </div>
         <div className="second">
-            <div className="postcontent">
+            <div className="postcontent" onClick={handlepostpage}>
                 <h2>How I spend the weekend</h2>
                 <p>Today I had the idea to speak about my weekend routine in Korean as a speaking practice. 
                     It’s been a long time since I’ve spoken in Korean so I may make some mistakes or struggle 
