@@ -7,6 +7,7 @@ import { ProfilePic } from '../navbar/nav';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMessage } from '@fortawesome/free-regular-svg-icons';
 import { faBookmark } from '@fortawesome/free-regular-svg-icons';
+import Save from './save';
 const Post = () => {
     const [username, setUsername] = useState('User Name');
     const navigate = useNavigate();
@@ -27,6 +28,7 @@ const Post = () => {
                     It’s been a long time since I’ve spoken in Korean so I may make some mistakes or struggle 
                     a bit to find the words, feel free to correct me and point it out if I make any mistakes.
                 </p>
+                
             </div>
             <div className="tag-icon">
                 <div className="tag">
@@ -38,8 +40,9 @@ const Post = () => {
                     <div className="nbr">65</div>
                     <button><FontAwesomeIcon icon={faMessage} size='xl' /></button>
                     <div className="nbr">14</div>
-                    <button><FontAwesomeIcon icon={faBookmark} size='xl'/></button>
+                    <Save/>
                     <div className="nbr">10</div>
+                    
                 </div>
             </div>
         </div>

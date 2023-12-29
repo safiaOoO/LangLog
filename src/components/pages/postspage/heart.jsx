@@ -10,7 +10,7 @@ const Heart = () => {
 
   return (
     <div>
-        <button style={{border:'none',backgroundColor:'white',borderRadius:'30px',marginTop:'5px'}}>
+        <button style={{border:'none',backgroundColor:'transparent',borderRadius:'30px',marginTop:'5px'}}>
       <IoMdHeart size={25} onClick={pressHeart} style={{
         cursor: 'pointer',
         display: 'inline-block',

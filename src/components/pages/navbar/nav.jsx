@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import "./nav.css"
+import { Link } from 'react-router-dom';
 
 const ProfilePic = () => {
     const [imageSrc, setImageSrc] = useState('./images/profile.png'); 
@@ -23,10 +24,11 @@ const Navbar = () => {
     <div className='navbar'>
     <img src="./images/logo.png" alt="logo" className='logo' />
     <div className='nav'>
-      <div className='title'>Posts</div>
-      <div className='title'>Following</div>
-      <div className='title'>Followers</div>
-      <div className='title'>Create post</div>
+      <Link to="/postspage" className='title'>Posts</Link>
+      <Link to="/" className='title'>Following</Link>
+      <Link to="/" className='title'>Followers</Link>
+      <Link to="/createpost" className='title'>Create post</Link>
+      
     </div>
     <ProfilePic/>
     </div>

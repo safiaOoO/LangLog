@@ -10,6 +10,7 @@ import {
   Navigate,
   RouterProvider,
 } from "react-router-dom";
+import Postform from './components/pages/createpost/createpost';
 
 
 function App(){
@@ -35,7 +36,10 @@ function App(){
       path: "/postcontent",
       element: <Postcontent/>,
      },
-     
+     {
+      path: "/createpost",
+      element: <Postform/>,
+     },
   ]);
 
   const [loading, setLoading] = useState(true);
