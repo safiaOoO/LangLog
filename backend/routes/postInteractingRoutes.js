@@ -7,7 +7,7 @@ router.post('/:postId/like', postInteractingController.likePost)
 router.post('/:postId/unlike', postInteractingController.unlikePost)
 router.post('/:postId/save', postInteractingController.savePost)
 router.post('/:postId/unsave', postInteractingController.unsavePost)
-router.post('/:postId/comments', postInteractingController.getComments)
+router.get('/:postId/comments', postInteractingController.getComments)
 
 
 

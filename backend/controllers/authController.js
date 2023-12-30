@@ -39,8 +39,8 @@ const authController = {
           const languagesspeak = userData.languagesspeak
           const languagestolearn = userData.languagestolearn
 
-          const sqlToLearn = " INSERT INTO languagetolearn (`idUser`, `codeLanguage`) VALUES (?)" // safia should put the values of the option language.codeLanguage and the language can be the between >lang<
-          const sqlSpeak = " INSERT INTO languagespeak (`idUser`, `codeLanguage`) VALUES (?)" // safia should put the values of the option language.codeLanguage and the language can be the between >lang<
+          const sqlToLearn = " INSERT INTO languagetolearn (`idUser`, `codeLanguage`) VALUES (?)"
+          const sqlSpeak = " INSERT INTO languagespeak (`idUser`, `codeLanguage`) VALUES (?)"
 
           var values = [userData.username, userData.fullname, userData.email, userData.password]
 
@@ -64,23 +64,24 @@ const authController = {
             if (err) {
               console.error("Error inserting the user:", err)
               return res.json({ success: false, message: "Internal server error" })
+            }else{
+              const id = data.insertId
+              console.log(id)
+              const languagesspeakValues = languagesspeak.map(language => [id, language])
+              const languagestolearnValues = languagestolearn.map(language => [id, language])
+              db.query(sqlSpeak,languagesspeakValues,(err)=>{
+                if (err) {
+                  console.error("Error inserting languages spoken:", err)
+                  return res.json({ success: false, message: "Internal server error" })
+                }
+              })
+              db.query(sqlToLearn,languagestolearnValues,(err)=>{
+                if (err) {
+                  console.error("Error inserting languages to learn:", err)
+                  return res.json({ success: false, message: "Internal server error" })
+                }
+              })
             }
-            const id = data.insertId
-            console.log(id)
-            const languagesspeakValues = languagesspeak.map(language => [id, language])
-            const languagestolearnValues = languagestolearn.map(language => [id, language])
-            db.query(sqlSpeak,languagesspeakValues,(err)=>{
-              if (err) {
-                console.error("Error inserting languages spoken:", err)
-                return res.json({ success: false, message: "Internal server error" })
-              }
-            })
-            db.query(sqlToLearn,languagestolearnValues,(err)=>{
-              if (err) {
-                console.error("Error inserting languages spoken:", err)
-                return res.json({ success: false, message: "Internal server error" })
-              }
-            })
             return res.json({ success: true, message: "Success"})
           })
         }
