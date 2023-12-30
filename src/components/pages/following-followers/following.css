@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap');
+*{
+    font-family: 'Lora', serif;
+}
+body{
+    background-color: #FBF6F0;
+}
+.user{
+    display: flex;
+    max-width: 900px;
+    width: 100%;
+    height: 160px;
+    margin: 2% 10%;
+    background-color: transparent;
+    border-bottom: solid 2px #3A4D39;
+}
+.user .first{
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+}
+.second{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 60%;
+    
+}         
+.user .username{
+    color: #000;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 400;
+    margin-bottom: 5px;
+}
+.user .bio{
+    color: #000;
+    font-size: 15px;
+    font-style: italic;
+    font-weight: 400;
+}
+.user .tag{
+    display: flex;
+    width: 300px;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+.user .language{
+    border:none;
+    width: 80px;
+    height: 25px;
+    border-radius: 30px;
+    background-color:#ECE3CE ;
+    text-align: center;
+    font-size: 14px;
+    padding-top: 5px;
+}
+.user .third{
+    width: 25%;
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 40px;
+}
+.user .number{
+    color: #000;
+    font-size: 25px;
+    font-style: italic;
+}
+.user .countpost,.user .countfollow{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

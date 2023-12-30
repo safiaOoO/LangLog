@@ -1,14 +1,11 @@
-import "./postcontent.css"
+
 import { ProfilePic, Navbar } from '../navbar/nav';
 import Heart from '../postspage/heart';
 import Follow from "../postspage/follow";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMessage } from '@fortawesome/free-regular-svg-icons';
-import { faBookmark } from '@fortawesome/free-regular-svg-icons';
 import { useState } from "react";
 import Footer from "../footer/footer";
 import Save from "../postspage/save";
-const Postcontent = () => {
+const Mypostcontent = () => {
     const [username, setUsername] = useState('User Name');
 
     return(
@@ -18,7 +15,6 @@ const Postcontent = () => {
                 <div className="first">
                     <ProfilePic/>
                     <div style={{margin:"10px 0"}}>{username}</div>
-                    <Follow/>
                 </div>
                 <div className="second">
                     <div className="postcontent">
@@ -73,4 +69,4 @@ const Postcontent = () => {
     );
 }
 
-export default Postcontent;
+export default Mypostcontent;

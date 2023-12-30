@@ -6,7 +6,7 @@ import "./post.css"
 import { ProfilePic } from '../navbar/nav';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMessage } from '@fortawesome/free-regular-svg-icons';
-
+import axios from 'axios';
 import { faBookmark } from '@fortawesome/free-regular-svg-icons';
 import Save from './save';
 import Follow from './follow';

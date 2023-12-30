@@ -5,37 +5,29 @@
 body{
     background-color: #FBF6F0;
 }
-.Post{
-    margin-top: 50px;
-    padding: 0px 100px;
+.mypost{
     display: flex;
-    border-bottom:solid 1px black;
-    height: 200px;
+    max-width: 900px;
+    width: 100%;
+    height: 210px;
+    margin: 2% 10%;
+    border-radius: 30px;
+    background-color: #FFFFFF;
 }
-.Post .first{
-    border-right: solid 1px black;
-    width: 200px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px 30px 0 0;
+.mypost .content{
+    margin-left: 70px;
 }
-
-.Post .second{
-    margin-left: 30px;
-}
-
-.Post .tag-date{
+.mypost .tag-icon{
     display: flex;
     justify-content:space-between ;
 }
-.Post .tag{
+.mypost .tag{
     display: flex;
     width: 200px;
     justify-content: space-around;
     align-items: center;
 }
-.Post .language,.Post .category{
+.mypost .language,.mypost .category{
     border:none;
     width: 80px;
     height: 30px;
@@ -45,26 +37,21 @@ body{
     font-size: 14px;
     padding-top: 5px;
 }
-.postpage .content{
-    border-bottom: solid 1px black;
-    padding: 0 18%;
-    margin-top: 50px;
-}
-.postpage .icons{
+.mypost .icons{
     display: flex;
+    border: solid 2px #000000;
     border-radius: 30px;
     width: 180px;
     margin-right: 20px;
     justify-content: space-around;
     align-items: center;
-    margin-left: 80%;
 }
-.postpage .icons button{
-    background-color: #FBF6F0;
+.mypost .icons button{
+    background-color: #FFFFFF;
     border: none;
     cursor: pointer;
 }
-.postpage .icons .nbr{
-    font-size: 15px;
-    margin-left: -40px;
+.mypost .icons .nbr{
+    font-size: 14px;
+    margin-left: -20px;
 }
