@@ -167,7 +167,7 @@ const postController = {
             }
             res.status(201).json (response)
         }catch(error) {
-            console.log(error)
+            console.error(error)
             res.status(500).json({message: ''})
         }
     }
