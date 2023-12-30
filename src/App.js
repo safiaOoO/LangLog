@@ -5,6 +5,8 @@ import Register from './components/pages/register/register';
 import Home from './components/pages/home/home';
 import Postspage from './components/pages/postspage/postspage';
 import Postcontent from './components/pages/Post content page/postcontent';
+import PostsandSaved from './components/pages/myposts-saved/myposts-saved';
+import Mypostcontent from './components/pages/mypostcontent/mypostcontent';
 import {
   createBrowserRouter,
   Navigate,
@@ -39,6 +41,14 @@ function App(){
      {
       path: "/createpost",
       element: <Postform/>,
+     },
+     {
+      path: "/postsandsaved",
+      element: <PostsandSaved/>,
+     },
+     {
+      path: "/mypostcontent",
+      element: <Mypostcontent/>,
      },
   ]);
 

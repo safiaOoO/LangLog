@@ -20,4 +20,37 @@
     font-size: 20px;
     font-style: italic;
     cursor: pointer;
+    text-decoration: none; 
+}
+
+  
+.nav .title.active {
+    text-decoration: underline;
+  }
+.dropdown-content{
+    border: solid 1px black;
+    position: absolute;
+    top: 16%;
+    right: 2%;
+    background-color: #FFFFFF;
+    border-radius: 30px;
+    width: 250px;
+    height: 220px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    align-items: center;
+    padding: 25px 5px ;
+}
+.dropdown-content .link{
+    background-color: #ECE3CE;
+    margin-top: 10%;
+    width:200px ;
+    height: 30px;
+    border-radius:30px ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
 }
