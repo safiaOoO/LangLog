@@ -7,9 +7,8 @@ const languagesController = {
     db.query(sql,(err,data)=>{
       if(err){
         console.error("Error saving getting languages:", err)
-        return res.json({ error: "Error getting languages" })
+        return res.json({ success: false, message: "Internal server error" })
       }
-      console.log(data)
       return res.json(data)
     })
   }

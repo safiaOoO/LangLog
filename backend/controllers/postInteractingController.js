@@ -11,9 +11,9 @@ const postInteractingController = {
         db.query(sqlComment,values,(err)=>{
             if(err){
                 console.error('Error inserting comment:', err)
-                return res.json({ error: 'Error inserting comment' })
+                return res.json({ success: false, message: "Internal server error" })
             }
-            return res.json({ success: true, message: 'Comment added successfully' })
+            return res.json({ success: false, message: "Internal server error" })
         })
     },
       
@@ -26,7 +26,7 @@ const postInteractingController = {
         db.query(sqlLike,values,(err)=>{
             if(err){
                 console.error('Error inserting the like:', err)
-                return res.json({ error: 'Error inserting the like' })
+                return res.json({ success: false, message: "Internal server error" })
             }
             return res.json({ success: true, message: 'The like added successfully' })
         })
@@ -41,7 +41,7 @@ const postInteractingController = {
         db.query(sqlUnlike,values,(err)=>{
             if (err){
                 console.error('Error deleting the like:', err)
-                return res.json({ error: 'Error deleting the like' })
+                return res.json({ success: false, message: "Internal server error" })
             }
             return res.json({ success: true, message: 'The like deleted successfully' })
         })
@@ -57,7 +57,7 @@ const postInteractingController = {
         db.query(sqlSave,values,(err)=>{
             if(err){
                 console.error('Error saving post:', err)
-                return res.json({ error: 'Error saving post' })
+                return res.json({ success: false, message: "Internal server error" })
             }
             return res.json({ success: true, message: 'Saving added successfully' })
         })
@@ -72,7 +72,7 @@ const postInteractingController = {
         db.query(sqlSave,values,(err)=>{
             if(err){
                 console.error('Error unsaving post:', err)
-                return res.json({ error: 'Error unsaving post' })
+                return res.json({ success: false, message: "Internal server error" })
             }
             return res.json({ success: true, message: 'Unsaving done successfully' })
         })
@@ -85,7 +85,7 @@ const postInteractingController = {
         db.query(sqlComments,(err,data)=>{
             if(err){
                 console.error('Error getting comments:', err)
-                return res.json({ error: 'Error getting comments' })
+                return res.json({ success: false, message: "Internal server error" })
             }
             return res.json({ success: true, comments: data })
         })

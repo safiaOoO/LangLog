@@ -10,7 +10,7 @@ const replyController = {
         db.query(sqlLike,values,(err)=>{
             if(err){
                 console.error('Error inserting the like:', err)
-                return res.json({ error: 'Error inserting the like' })
+                return res.json({ success: false, message: "Internal server error" })
             }
             return res.json({ success: true, message: 'The like added successfully' })
         })
@@ -22,7 +22,7 @@ const replyController = {
         db.query(sqlUnlike,(err)=>{
             if(err){
                 console.error('Error deleting the like:', err)
-                return res.json({ error: 'Error deleting the like' })
+                return res.json({ success: false, message: "Internal server error" })
             }
             return res.json({ success: true, message: 'The like deleted successfully' })
         })
