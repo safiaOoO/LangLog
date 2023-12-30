@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./postspage.css"
 import { CircleFrame, Navbar } from '../navbar/nav';
 import Post from './post';
@@ -7,7 +7,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { CiFilter } from "react-icons/ci";
 
 const Postspage = () => {
-  
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    fetch('/post/getPostsPage') 
+      .then(response => response.json())
+      .then(data => setPosts(data))
+      .catch(error => console.error('Error fetching posts:', error));
+  }, []);
   const [selectedLanguage, setSelectedLanguage] = useState([]);
 
   return (
@@ -28,9 +35,9 @@ const Postspage = () => {
           <CiFilter  size={40} />
           </div>
         </div>
-         
-        <Post/>
-        <Post/>
+        {posts.map(post => (
+          <Post key={post.id} post={post} />
+        ))}
       </div>
       
     </div>
