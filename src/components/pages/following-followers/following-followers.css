@@ -1,15 +1,15 @@
-.post-saved{
+.following-followers{
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 50px;
 }
-.post-saved .buttons{
+.following-followers .buttons{
     margin-right: 660px;
     margin-bottom:-8px ;
     width: 240px;
 }
-.post-saved .buttons button{
+.following-followers .buttons button{
     background-color: transparent;
     border: none;
     color: #739072;
@@ -20,15 +20,16 @@
     border-top-left-radius: 20px;
     cursor: pointer;
 }
-.post-saved .posts{
+.following-followers .users{
     margin-right: 200px;
 }
-.post-saved hr{
+.following-followers hr{
     color: #3A4D39;
     background-color: #3A4D39;
     width: 70%;
     height: 1px;
     margin-right: 200px;
+
 }
 
   

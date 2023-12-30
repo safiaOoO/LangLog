@@ -7,6 +7,7 @@ import Postspage from './components/pages/postspage/postspage';
 import Postcontent from './components/pages/Post content page/postcontent';
 import PostsandSaved from './components/pages/myposts-saved/myposts-saved';
 import Mypostcontent from './components/pages/mypostcontent/mypostcontent';
+import Followingfollowers from './components/pages/following-followers/following-followers';
 import {
   createBrowserRouter,
   Navigate,
@@ -49,6 +50,10 @@ function App(){
      {
       path: "/mypostcontent",
       element: <Mypostcontent/>,
+     },
+     {
+      path: "/followingfollowers",
+      element: <Followingfollowers/>,
      },
   ]);
 

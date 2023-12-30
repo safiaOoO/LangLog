@@ -53,7 +53,7 @@ const Navbar = () => {
   };
 
   const handleFollowers = () => {
-    navigate('/');
+    navigate('/followingfollowers');
   };
 
   
