@@ -21,7 +21,7 @@ const getPostsByLanguages = async (userId) => {
       SELECT *
       FROM post
       WHERE codeLanguage IN (?)
-    `;
+    `
   
     const [spokenPosts] = await db.query(spokenPostsQuery, [spokenLanguages]);
 
@@ -29,7 +29,7 @@ const getPostsByLanguages = async (userId) => {
       SELECT *
       FROM post
       WHERE codeLanguage IN (?)
-    `;
+    `
   
     const [learningPosts] = await db.query(learningPostsQuery, [learningLanguages]);
 
@@ -140,7 +140,18 @@ const postController = {
     },
 
     getPostInfo: async (req, res) => {
+        try {
+            const postId = req.params.idPost
+            const sql = 'SELECT u.userName, u.profilePicturePath, p.title, p.description, v.CommentCount, v.LikeCount, v.SaveCount, (SELECT languageName FROM languages WHERE codeLanguage = p.codeLanguage) as language FROM users as u ,post as p ,poststats as v WHERE p.idPost = ? AND u.idUser = p.idUser AND v.idPost = p.idPost'
+            const result = await db.query(sql, [postId])
+            const postInfo = result[0]
 
+            res.json(postInfo)
+            
+        } catch(error) {
+            console.error('Error fetching post information:', error)
+            res.status(500).json({ error: 'Internal Server Error' })
+        }
     },
 
     searchByFilter: async (req, res) => {
