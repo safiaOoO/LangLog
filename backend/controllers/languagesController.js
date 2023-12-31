@@ -3,7 +3,6 @@ const db = require("../config/db")
 const languagesController = {
   getLanguages: (req, res) => {
     const sql = 'SELECT * FROM languages'
-    
     db.query(sql,(err,data)=>{
       if(err){
         console.error("Error saving getting languages:", err)
@@ -13,10 +12,10 @@ const languagesController = {
     })
   },
 
-  getLanguagesToSpeak: (req,res)=>{ // get the languages that the user don't speak and didn't start learning them
+  getLanguagestoLearn: (req,res)=>{ // get the languages that the user don't speak and didn't start learning
     const userID = req.session.userID
-    const sqlLanguages = `SELECT * FROM languages WHERE codeLanguage NOT IN ( SELECT codeLanguage FROM languagespeak WHERE idUser = ${userID} UNION SELECT codeLanguage FROM languageToLearn WHERE idUser = ${userID} )`
-    db.query(sqlLanguages,(err,data)=>{
+    const sqlLanguages = 'SELECT * FROM languages WHERE codeLanguage NOT IN ( SELECT codeLanguage FROM languagespeak WHERE idUser = ? UNION SELECT codeLanguage FROM languageToLearn WHERE idUser = ?)'
+    db.query(sqlLanguages,[userID,userID],(err,data)=>{
       if(err){
         console.error("Error getting languages:", err)
         return res.json({ success: false, message: "Internal server error" })
@@ -25,14 +24,15 @@ const languagesController = {
     })
   },
 
-  getLanguagesLearn: (req,res)=>{ // get the languages that the user is learning if he's done learning them they become languagespeak
+  getLanguagesLearning: (req,res)=>{ // get the languages that the user is learning if he's done learning them they become languagespeak
     const userID = req.session.userID
-    const sqlLearning = `SELECT * FROM languagestolearn WHERE idUser = ${userID}`
-    db.query(sqlLearning,(err,data)=>{
+    const sqlLearning = 'SELECT * FROM languages WHERE codeLanguage IN (SELECT codeLanguage FROM languagetolearn WHERE idUser = ?)'
+    db.query(sqlLearning,[userID],(err,data)=>{
       if(err){
         console.error("Error getting languages:", err)
         return res.json({ success: false, message: "Internal server error" })
       }
+      console.log('languages learning',data)
       return res.json(data)
     })
   }

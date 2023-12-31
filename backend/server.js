@@ -38,7 +38,7 @@ app.use(session({
 }))
 
 app.use("/auth", authRoutes)
-app.use("/user", userRoutes)
+app.use("/", userRoutes)
 app.use("/languages", languagesRoutes)
 app.use('/posts', postInteractingRoutes)
 app.use('/comments', commentRoutes);

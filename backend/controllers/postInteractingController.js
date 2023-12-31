@@ -46,8 +46,7 @@ const postInteractingController = {
             return res.json({ success: true, message: 'The like deleted successfully' })
         })
     },
-
-      
+   
     savePost: (req,res)=>{
         const user = req.session.userID 
         const post = req.params.postId 
@@ -89,7 +88,21 @@ const postInteractingController = {
             }
             return res.json({ success: true, comments: data })
         })
+    },
+
+    getContent : (req,res) => {
+        const post = req.params.postId
+        const sqlPost = 'SELECT * FROM post WHERE idPost =?'
+
+        db.query(sqlPost,[post],(err,data)=>{
+            if(err){
+                console.error('Error getting post:', err)
+                return res.json({ success: false, message: "Internal server error" })
+            }
+            return res.json({ success: true, post: data })
+        })
     }
+    
 }
 
 

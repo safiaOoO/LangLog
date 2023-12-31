@@ -8,6 +8,7 @@ router.post('/:postId/unlike', postInteractingController.unlikePost)
 router.post('/:postId/save', postInteractingController.savePost)
 router.post('/:postId/unsave', postInteractingController.unsavePost)
 router.get('/:postId/comments', postInteractingController.getComments)
+router.get('/:postId', postInteractingController.getContent)
 
 
 

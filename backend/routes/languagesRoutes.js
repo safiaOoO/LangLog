@@ -4,7 +4,7 @@ const languagesController = require("../controllers/languagesController")
 const router = express.Router()
 
 router.get("/", languagesController.getLanguages)
-router.get("/speak", languagesController.getLanguagesToSpeak)
-router.get("/learn", languagesController.getLanguagesLearn)
+router.get("/toLearn", languagesController.getLanguagestoLearn)
+router.get("/learning", languagesController.getLanguagesLearning)
 
 module.exports = router

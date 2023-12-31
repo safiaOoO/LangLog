@@ -116,6 +116,7 @@ const authController = {
           if(data.length > 0){
             return res.json({ Login: false, message:"The password is wrong" })
           }else{
+            console.log(data)
             return res.json({ Login: false,message:"The email or the username you entered doesn't exist" })
           }
         })
