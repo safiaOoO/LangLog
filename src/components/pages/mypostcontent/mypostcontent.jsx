@@ -5,6 +5,7 @@ import Follow from "../postspage/follow";
 import { useState } from "react";
 import Footer from "../footer/footer";
 import Save from "../postspage/save";
+import Commentsection from '../Post content page/commentsection'
 const Mypostcontent = () => {
     const [username, setUsername] = useState('User Name');
 
@@ -60,9 +61,7 @@ const Mypostcontent = () => {
                 </div>
            </div>
            <div className="comments">
-             comments here
-             <br/>
-             comment and reply
+                <Commentsection/>
            </div>
            <Footer/>
         </div>

@@ -37,8 +37,10 @@
 .commentsection .container{
     margin-top: 20px;
     width: 700px;
-    border-bottom: solid 1px black;
+    border-top: solid 1px black;
+    padding-top: 20px;
 }
+
 .commentsection .pic{
     display: flex;
     width: 100%;

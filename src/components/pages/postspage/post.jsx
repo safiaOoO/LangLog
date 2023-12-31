@@ -53,7 +53,7 @@ const Post = () => {
                 <div className="icons">
                     <Heart/>
                     <div className="nbr">{postInfo.likeCount}</div>
-                    <button><FontAwesomeIcon icon={faMessage} size='xl' /></button>
+                    <button><FontAwesomeIcon icon={faMessage} size='xl' onClick={handlepostpage} /></button>
                     <div className="nbr">{postInfo.commentCount}</div>
                     <Save/>
                     <div className="nbr">{postInfo.saveCount}</div>

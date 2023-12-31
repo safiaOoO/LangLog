@@ -32,7 +32,7 @@ const Mypost = () => {
                 <div className="icons">
                     <Heart/>
                     <div className="nbr">65</div>
-                    <button><FontAwesomeIcon icon={faMessage} size='xl' /></button>
+                    <button><FontAwesomeIcon icon={faMessage} size='xl' onClick={handlepostpage}/></button>
                     <div className="nbr">14</div>
                     <Save/>
                     <div className="nbr">10</div>
