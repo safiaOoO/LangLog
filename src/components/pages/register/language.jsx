@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import "./language.css"
-const LanguageSelector = ({ selectedLanguages, setSelectedLanguages, pageType  }) => {
+const LanguageSelector = ({ selectedLanguages, setSelectedLanguages, pageType ,api }) => {
   const [languages, setLanguages] = useState([]);
   const [availableLanguages, setAvailableLanguages] = useState([]);
   const [selectedLanguage, setSelectedLanguage] = useState('');
 
   useEffect(() => {
-    axios.get('http://localhost:8081/languages')
+    axios.get(api)
       .then(res => {
         const fetchedLanguages = res.data;
         setLanguages(fetchedLanguages);
         setAvailableLanguages(fetchedLanguages);
       })
       .catch(err => console.error(err));
-  }, []);
+  }, [api]);
 
   const handleLanguageChange = (event) => {
     const newSelectedLanguage = event.target.value;

@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Navbar } from '../navbar/nav';
 import './following-followers.css';
 import Following from './following';
 const Followings = () => {
   return (
     <div>
-      
+      <Following />
+      <Following />
+      <Following />
     </div>
   );
 };
@@ -13,19 +15,28 @@ const Followings = () => {
 const Followers = () => {
   return (
     <div>
-      
+        <Following />
+        <Following />
     </div>
   );
 };
 
 const Followingfollowers = () => {
-  const [selectedTab, setSelectedTab] = useState('myPosts');
+  const [selectedTab, setSelectedTab] = useState('');
   
 
   const presstab = (tab) => {
     setSelectedTab(tab);
     
   };
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const tabParam = urlParams.get('tab');
+    if (tabParam && (tabParam === 'followers' || tabParam === 'following')) {
+      setSelectedTab(tabParam);
+    }
+  }, []);
+
 
   return (
     <div>
@@ -47,8 +58,8 @@ const Followingfollowers = () => {
         </div>
         <hr />
         <div className="users">
-          {selectedTab === 'following' && <Following />}
-          {/* {selectedTab === 'followers' && <Follower />} */}
+          {selectedTab === 'following' && <Followings />}
+          {selectedTab === 'followers' && <Followers />}
         </div>
       </div>
     </div>

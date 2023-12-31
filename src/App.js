@@ -8,6 +8,8 @@ import Postcontent from './components/pages/Post content page/postcontent';
 import PostsandSaved from './components/pages/myposts-saved/myposts-saved';
 import Mypostcontent from './components/pages/mypostcontent/mypostcontent';
 import Followingfollowers from './components/pages/following-followers/following-followers';
+import ManageAcc from './components/pages/mangeaccount/mangeaccount'
+import Error from './components/pages/error'
 import {
   createBrowserRouter,
   Navigate,
@@ -54,6 +56,14 @@ function App(){
      {
       path: "/followingfollowers",
       element: <Followingfollowers/>,
+     },
+     {
+      path: "/manageaccount",
+      element: <ManageAcc/>,
+     },
+     {
+      path: "/errorpage",
+      element: <Error/>,
      },
   ]);
 

@@ -22,8 +22,14 @@ const Navbar = () => {
   const [activeLink, setActiveLink] = useState(null);
   const navigate = useNavigate();
 
-  const handleLinkClick = (index) => {
+  const handleLinkClick = (index,event) => {
+    event.preventDefault();
     setActiveLink(index);
+     const href = event.currentTarget.getAttribute('href');
+
+    if (href) {
+      navigate(href);
+    }
   };
   useEffect(() => {
     const currentLink = document.querySelector(`.title.active`);
@@ -45,14 +51,24 @@ const Navbar = () => {
   };
 
   const handleManageAccount = () => {
-    navigate('/');
+    navigate('/manageaccount');
   };
 
   const handlePosts = () => {
     navigate('/postsandsaved');
   };
 
-  const handleFollowers = () => {
+  const handleFollowers = (event) => {
+    handleLinkClick(2,event);
+    navigate(`/followingfollowers?tab=followers`);
+  };
+
+  const handleFollowing = (event) => {
+    handleLinkClick(1,event);
+    navigate(`/followingfollowers?tab=following`);
+  };
+
+  const handleFollowingFollowers = () => {
     navigate('/followingfollowers');
   };
 
@@ -63,19 +79,15 @@ const Navbar = () => {
     <div className='nav'>
       <Link to="/postspage" 
             className={`title ${activeLink === 0 ? 'active' : ''}`}
-            onClick={() => handleLinkClick(0)}>
+            onClick={(event) => handleLinkClick(0,event)}>
             Posts</Link>
-      <Link to="/"
-            className={`title ${activeLink === 1 ? 'active' : ''}`}
-            onClick={() => handleLinkClick(1)}>
-            Following</Link>
-      <Link to="/" 
-            className={`title ${activeLink === 2 ? 'active' : ''}`}
-            onClick={() => handleLinkClick(2)}
-            >Followers</Link>
+            <div className={`title ${activeLink === 1 ? 'active' : ''}`}
+                 onClick={handleFollowing}>Following</div>
+            <div className={`title ${activeLink === 2 ? 'active' : ''}`} onClick={handleFollowers}>Followers</div>
+      
       <Link to="/createpost" 
             className={`title ${activeLink === 3 ? 'active' : ''}`}
-            onClick={() => handleLinkClick(3)}
+            onClick={(event) => handleLinkClick(3,event)}
             >Create post</Link>
       
     </div>
@@ -86,7 +98,7 @@ const Navbar = () => {
           <div>{username}</div>
           <div className='link' onClick={handleManageAccount}>Manage your account</div>
           <div className='link' onClick={handlePosts}>My posts / Saved posts</div>
-          <div className='link' onClick={handleFollowers}>following / followers</div>
+          <div className='link' onClick={handleFollowingFollowers}>following / followers</div>
         </div>
       )}
     </div>

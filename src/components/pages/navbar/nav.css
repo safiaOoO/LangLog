@@ -24,8 +24,8 @@
 }
 
   
-.nav .title.active {
-    text-decoration: underline;
+.navbar .nav .title.active {
+    text-decoration: underline !important;
   }
 .dropdown-content{
     border: solid 1px black;

@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap');
+*{
+    font-family: 'Lora', serif;
+}
+.commentsection{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 800px;
+    border-radius: 8px;
+    margin: 50px 0;
+    background-color: transparent;
+    position: relative;
+}
+.commentsection .addcomment textarea{
+    width: 600px;
+    border-radius: 30px;
+    padding-left: 20px;
+    padding-top: 5px;
+    border:solid 1px ;
+}
+.commentsection .send{
+    position: absolute;
+    top: 8px;
+    right: 100px;
+    cursor: pointer;
+}
+.commentsection .comments{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 750px;
+    background-color: #FFFF;
+    border-radius: 8px;
+    margin-top: 40px;
+}
+.commentsection .container{
+    margin-top: 20px;
+    width: 700px;
+    border-bottom: solid 1px black;
+}
+.commentsection .pic{
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+.commentsection .inf{
+    margin-left: 15px;
+}
+.commentsection .comment , .commentsection .replycmt{
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+.commentsection .comment p{
+    width: 60%;
+    margin-left: 80px;
+}
+.commentsection .comment .reply{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 150px;
+    margin-left: 50px;
+}
+.commentsection .comment .reply .nbr{
+    margin-left: -15px;
+}
+.commentsection .reply button{
+    background-color: transparent;
+    border: none;
+    text-decoration: underline;
+    font-size: 18px;
+    cursor: pointer;
+}
+.commentsection .container1{
+    margin-top: 20px;
+    width: 650px;
+    margin-left: 50px;
+}
+.commentsection .replycmt p{
+    width: 70%;
+    margin-left: 80px;
+}
+.commentsection .replycmt .reply {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+}
+.commentsection .replybox{
+   display: flex;
+    align-items: center;
+}
+.commentsection .replybox textarea{
+    width: 100%;
+    border-radius: 20px;
+    padding-left: 20px;
+    padding-top: 5px;
+    
+}
+.commentsection .replybox button{
+    border-radius: 10px;
+    height: 30px;
+    border: solid 1px black;
+    background-color: transparent;
+    cursor: pointer;
+}

@@ -16,7 +16,7 @@ const Mypost = () => {
     <div className='mypost' >
         
         <div className="content">
-            <div className="postcontent" onClick={handlepostpage}>
+            <div className="postcontent" onClick={handlepostpage} >
                 <h2>How I spend the weekend</h2>
                 <p>Today I had the idea to speak about my weekend routine in Korean as a speaking practice. 
                     It’s been a long time since I’ve spoken in Korean so I may make some mistakes or struggle 

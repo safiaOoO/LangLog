@@ -2,13 +2,11 @@ import "./postcontent.css"
 import { ProfilePic, Navbar } from '../navbar/nav';
 import Heart from '../postspage/heart';
 import Follow from "../postspage/follow";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMessage } from '@fortawesome/free-regular-svg-icons';
-import { faBookmark } from '@fortawesome/free-regular-svg-icons';
 import { useState } from "react";
 import Footer from "../footer/footer";
 import Save from "../postspage/save";
-const Postcontent = () => {
+import Commentsection from "./commentsection";
+const Postcontent = ({ isMyPost }) => {
     const [username, setUsername] = useState('User Name');
 
     return(
@@ -18,7 +16,7 @@ const Postcontent = () => {
                 <div className="first">
                     <ProfilePic/>
                     <div style={{margin:"10px 0"}}>{username}</div>
-                    <Follow/>
+                    <Follow />
                 </div>
                 <div className="second">
                     <div className="postcontent">
@@ -64,9 +62,7 @@ const Postcontent = () => {
                 </div>
            </div>
            <div className="comments">
-             comments here
-             <br/>
-             comment and reply
+              <Commentsection/>
            </div>
            <Footer/>
         </div>

@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap');
+*{
+    font-family: 'Lora', serif;
+}
+body{
+    background-color: #FBF6F0;
+}
+.editprofile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 80px;
+}
+.editprofile h1{
+    width: 780px;
+}
+.editprofile .infoscard{
+    display: flex;
+    width: 800px;
+    height: 200px;
+    border-radius: 30px;
+    background: white;
+    justify-content: space-around;
+}
+.editprofile .infos{
+    width: 85%;
+    padding-top: 18px;
+}
+.editprofile .pic{
+    width: 10%;
+    margin-left: 20px;
+    padding-top: 10px;
+}
+.editprofile .edit{
+    background-color: transparent;
+    color: #000;
+    font-size: 22px;
+    font-style: italic;
+    text-decoration-line: underline;
+    margin-left: 520px;
+    margin-top: 30px;
+}
+.editprofile .edit:hover{
+    background-color: transparent;
+}
+.editprofile form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 30px;
+    background: white;
+    width: 800px;
+    height: 650px;
+    margin: 50px 0 80px 0 ;
+}
+.editprofile h2{
+    width: 670px;
+}
+.editprofile .input-group {
+    position: relative;
+    margin-top: 30px;
+}
+
+.editprofile .input-group .fullname,.input-group .username,.input-group .bio{
+    padding: 5px 20px;
+    border: 2px solid #739072;
+    border-radius: 30px;
+    width: 650px;
+    height: 30px;
+  }
+  
+  .editprofile .input-group label {
+    position: absolute;
+    top: 10px;
+    left: 30px;
+    color: #aaa;
+    pointer-events: none;
+    transition: 0.5s ease all;
+  }
+  
+  .editprofile input:focus + label,
+  .editprofile input:not(:placeholder-shown) + label {
+    top: -25px;
+    left:20px;
+    font-size: 18px;
+    color: #000000;
+  }
+  
+  .editprofile button{
+    background-color: #739072;
+    width: 150px;
+    height: 40px;
+    border-radius: 30px;
+    border: none;
+    font-size: 15px;
+    font-style: italic;
+    font-weight: 400;
+    color: #FFFFFF;
+    cursor: pointer;
+    margin: 50px 0 0 540px;
+  }
+  
+  
+  .editprofile button:hover{
+    background-color: #4d604e ;
+  }

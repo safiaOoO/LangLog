@@ -49,6 +49,7 @@ body{
     border-bottom: solid 1px black;
     padding: 0 18%;
     margin-top: 50px;
+    padding-bottom: 30px;
 }
 .postpage .icons{
     display: flex;
@@ -67,4 +68,9 @@ body{
 .postpage .icons .nbr{
     font-size: 15px;
     margin-left: -40px;
+}
+.postpage .comments{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

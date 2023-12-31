@@ -170,6 +170,7 @@ const Register = () => {
           name="languagestolearn"
           selectedLanguages={selectedLanguagesToLearn}
           setSelectedLanguages={setSelectedLanguagesToLearn}
+          api="http://localhost:8081/languages"
           />  
           <h5>Choose the Language(s) that you speak: </h5>  
           <LanguageSelector
@@ -177,6 +178,7 @@ const Register = () => {
           name="languagesspeak"
           selectedLanguages={selectedMotherTongues}
           setSelectedLanguages={setSelectedMotherTongues}
+          api="http://localhost:8081/languages"
           /> 
           <button className='button' onClick={handleSave}>sign up</button>
           <div className="prev">
