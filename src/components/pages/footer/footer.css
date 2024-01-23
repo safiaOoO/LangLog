@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap');
+*{
+    font-family: 'Lora', serif;
+}
+.footer{
+    background-color: #739072;
+    min-height: 300px;
+}
+.footer .cntr{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 50px;
+}
+.footer .first{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.footer .first p{
+    color: #000;
+    text-align: center;
+    text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.25);
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 500;
+}
+.footer .second{
+    max-width: 480px;
+}
+.footer .third{
+    height: 150px;
+}
+.footer .links{
+    display: flex;
+    flex-direction: column;
+    
+}
+.footer a{
+    color: #000;
+}
+.footer .line{
+    width: 35%;
+}

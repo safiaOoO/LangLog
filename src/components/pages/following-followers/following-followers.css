@@ -1,0 +1,35 @@
+.following-followers{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+.following-followers .buttons{
+    margin-right: 660px;
+    margin-bottom:-8px ;
+    width: 240px;
+}
+.following-followers .buttons button{
+    background-color: transparent;
+    border: none;
+    color: #739072;
+    font-family: Lora;
+    font-size: 25px;
+    width: 120px;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    cursor: pointer;
+}
+.following-followers .users{
+    margin-right: 200px;
+}
+.following-followers hr{
+    color: #3A4D39;
+    background-color: #3A4D39;
+    width: 70%;
+    height: 1px;
+    margin-right: 200px;
+
+}
+
+  

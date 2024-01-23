@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap');
+
+.navbar{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.nav{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #739072;
+    font-family: 'Lora', serif;
+    width: 70%;
+    height: 60px;
+    border-radius: 60px;
+}
+.nav .title{
+    color: #FFFFFF;
+    font-size: 20px;
+    font-style: italic;
+    cursor: pointer;
+    text-decoration: none; 
+}
+
+  
+.navbar .nav .title.active {
+    text-decoration: underline !important;
+  }
+.dropdown-content{
+    border: solid 1px black;
+    position: absolute;
+    top: 16%;
+    right: 2%;
+    background-color: #FFFFFF;
+    border-radius: 30px;
+    width: 250px;
+    height: 220px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    align-items: center;
+    padding: 25px 5px ;
+}
+.dropdown-content .link{
+    background-color: #ECE3CE;
+    margin-top: 10%;
+    width:200px ;
+    height: 30px;
+    border-radius:30px ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+}

@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap');
+*{
+    font-family: 'Lora', serif;
+}
+body{
+    background-color: #FBF6F0;
+}
+.mypost{
+    display: flex;
+    max-width: 900px;
+    width: 100%;
+    height: 210px;
+    margin: 2% 10%;
+    border-radius: 30px;
+    background-color: #FFFFFF;
+}
+.mypost .content{
+    margin-left: 70px;
+}
+.mypost .tag-icon{
+    display: flex;
+    justify-content:space-between ;
+}
+.mypost .tag{
+    display: flex;
+    width: 200px;
+    justify-content: space-around;
+    align-items: center;
+}
+.mypost .language,.mypost .category{
+    border:none;
+    width: 80px;
+    height: 30px;
+    border-radius: 30px;
+    background-color:#ECE3CE ;
+    text-align: center;
+    font-size: 14px;
+    padding-top: 5px;
+}
+.mypost .icons{
+    display: flex;
+    border: solid 2px #000000;
+    border-radius: 30px;
+    width: 180px;
+    margin-right: 20px;
+    justify-content: space-around;
+    align-items: center;
+}
+.mypost .icons button{
+    background-color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+}
+.mypost .icons .nbr{
+    font-size: 14px;
+    margin-left: -20px;
+}

@@ -1,0 +1,47 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap');
+
+*{
+  font-family: 'Lora', serif;
+}
+.herosection{
+    height: 600px;
+    background-image: url(../../../../public/images/background.png); 
+}
+
+.herosection .title{
+    color: #000;
+    text-align: center;
+    font-size: 35px;
+    font-style: italic;
+    font-weight: 600;
+    line-height: normal;
+    margin-top: 50px;
+}
+.herosection .description{
+    color: #000;
+    text-align: center;
+    font-size: 25px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: normal;
+    width: 53%;
+    margin-top: 30px;
+}
+.herosection button{
+    background-color: #739072;
+    width: 150px;
+    height: 45px;
+    border-radius: 30px;
+    border: none;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 400;
+    color: #FFFFFF;
+    cursor: pointer;
+    margin-top: 30px;
+}
+.herosection button:hover{
+    background-color: #4d604e ;
+    text-shadow:2px 2px 4px rgba(255, 255, 255, 0.7);
+  }
