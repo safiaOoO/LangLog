@@ -1,4 +1,4 @@
-const db = require("../config/db").default
+const db = require("../config/db")
 
 userFollowerController = {
     getUserStats: async (req, res) => {
