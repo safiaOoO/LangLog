@@ -36,15 +36,23 @@ const Commentsection = () => {
     setReplyingTo(null);
   };
 
+  const handleKeyDown=(e) =>{
+    if (e.key === 'Enter') {
+      handleAddComment(newCommentText);
+    }
+  };
+  
+  
   return (
     <div className='commentsection'>
       <div className='addcomment'>
         <textarea
           value={newCommentText}
           onChange={e => setNewCommentText(e.target.value)}
+          onKeyDown={handleKeyDown}
           placeholder='Add comment'
         />
-        <FiSend className='send' size={30} onClick={handleAddComment}/>
+        <FiSend className='send' size={30} onClick={handleAddComment}  />
       </div>
         <div className="comments">
            
