@@ -4,7 +4,6 @@ const session = require("express-session")
 const cookieParser = require("cookie-parser")
 const bodyParser = require("body-parser")
 
-const app = express()
 const authRoutes = require("./routes/authRoutes")
 const userRoutes = require("./routes/userRoutes")
 const languagesRoutes = require("./routes/languagesRoutes")
@@ -12,6 +11,13 @@ const postInteractingRoutes = require("./routes/postInteractingRoutes")
 const commentRoutes = require("./routes/commentRoutes")
 const replyRoutes = require('./routes/replyRoutes')
 
+const authRoutes = require("./routes/authRoutes");
+const userRoutes = require("./routes/userRoutes");
+const postRoutes = require("./routes/postRoutes")
+
+const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 const PORT = process.env.PORT || 8081;
 
@@ -20,14 +26,11 @@ app.use(cors({
   methods: ["POST", "GET"],
   credentials: true
 }))
-app.use(express.json())
 app.use(cookieParser())
-app.use(bodyParser.json())
-app.use(express.urlencoded({ extended: true }));
 
+app.use(bodyParser.json());
 
 app.use(session({
-  secret: 'secret',
   resave: false,
   saveUninitialized: false, // if it was true i will always get a cookie whenever i type anything
   cookie: {
@@ -43,6 +46,8 @@ app.use("/languages", languagesRoutes)
 app.use('/posts', postInteractingRoutes)
 app.use('/comments', commentRoutes);
 app.use('/replies', replyRoutes);
+app.use("/user", userRoutes)
+app.use("/post", postRoutes)
 
 
 app.listen(PORT, () => {
