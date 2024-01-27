@@ -6,9 +6,9 @@ import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import "./register.css"
 import LanguageSelector from "./language"
 import axios from 'axios';
-import { Navigate } from 'react-router-dom';
-const Register = () => {
-  
+import { useNavigate } from 'react-router-dom';
+
+const Register = () => {  
   
   const [step, setStep] = useState(1);
   const [userData, setUserData] = useState({
@@ -25,6 +25,8 @@ const Register = () => {
   const [selectedLanguagesToLearn, setSelectedLanguagesToLearn] = useState([]);
   const [selectedMotherTongues, setSelectedMotherTongues] = useState([]);
 
+  const navigate = useNavigate()
+ 
   const handleImageChange = (selectedImage,file) => {
     setUserData((prevData) => ({ ...prevData, picture: selectedImage ,pictureName: file.name }));
   };
@@ -56,12 +58,27 @@ const Register = () => {
     };
     axios.post('http://localhost:8081/auth/signup', updatedUserData)
     .then(res => {
-      console.log(res.data)})
+      if(res.data.success === true){
+        navigate('/login')
+      }else{
+        alert(res.data.message)
+      }
+    })
     .catch(error => {
-      console.error('Error:', error);
-    });
-  };
+      console.error('Error:', error)
+    })
+  }
 
+  axios.defaults.withCredentials = true
+  useEffect(()=>{
+    axios.get('http://localhost:8081/checkUser')
+    .then(res => {
+        if(res.data.valid === true){
+            navigate('/postspage')
+        }
+    })
+    .catch(err=> console.log(err))
+  })
   
   return (
     <div className='register'>

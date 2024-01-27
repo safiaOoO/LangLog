@@ -22,7 +22,7 @@ function App(){
 
   const router = createBrowserRouter([
     {
-      path:"/home",
+      path:"/",
       element:<Home/>
     },
     {
@@ -71,7 +71,7 @@ function App(){
 
   useEffect(() => {
     const Data = async () => {
-      await new Promise((resolve) => setTimeout(resolve, 0));
+      await new Promise((resolve) => setTimeout(resolve, 3000));
       setLoading(false);
     };
 

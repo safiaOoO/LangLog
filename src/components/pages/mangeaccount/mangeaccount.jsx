@@ -4,39 +4,90 @@ import "./manageaccount.css"
 import { useState,useEffect } from "react";
 import axios from 'axios';
 import LanguageSelector from "../register/language"
+import { useNavigate } from "react-router-dom";
 
 const ManageAcc = () => {
-  const [selectedLanguagesToLearn, setSelectedLanguagesToLearn] = useState([]);
-  const [selectedMotherTongues, setSelectedMotherTongues] = useState([]);
-  const [selectedLanguage, setSelectedLanguage] = useState([]);
-  const [isEditing, setIsEditing] = useState(false);
-    
+
+  const navigate = useNavigate()
+
   const defaultUserData = {
     fullname: 'fullname',
     username: 'username',
-    bio:'bio',
+    bio:'No bio',
     languagesspeak:['arabic','english','french'],
     languagestolearn:['italian' , 'korean'],
   };
   const [userData, setUserData] = useState(defaultUserData);
-  const [formValues, setFormValues] = useState(defaultUserData);
+  const [formValues, setFormValues] = useState({
+    fullname: '',
+    username: '',
+    bio:'',
+    languagespeak:[],
+    languagetolearn:[],
+  });
+
+  const [SelectedLanguagesToLearn, setSelectedLanguagesToLearn] = useState([]);
+  const [SelectedMotherTongues, setSelectedMotherTongues] = useState([]);
+  const [selectedLanguage, setSelectedLanguage] = useState([]);
+  const [isEditing, setIsEditing] = useState(false);
+    
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
   };
 
-  useEffect(() => {
-    setSelectedLanguagesToLearn(defaultUserData.languagestolearn);
-    setSelectedMotherTongues(defaultUserData.languagesspeak);
-  }, []);
-
   const handleSave = () => {
-    setUserData(formValues);
+    setFormValues(formValues);
     setIsEditing(false);
+    const values = {
+      ...formValues,
+      languagetolearn: SelectedLanguagesToLearn,
+      languagespeak: SelectedMotherTongues,
+    };
     console.log(formValues);
+    axios.post('http://localhost:8081/updateProfile',values)
+    .then(res=>{
+      navigate('/manageaccount')
+    })
+    .catch(err=>console.log(err))
   };
-    
+
+  axios.defaults.withCredentials = true
+
+  useEffect(() => {
+    axios.get('http://localhost:8081/checkUser')
+    .then(res => {
+        if(res.data.valid === false){
+          navigate('/login')
+        }else{
+          const fetchData = async () => {
+            try {
+              const profileRes = await axios.get('http://localhost:8081/getProfile')
+              if (profileRes.data.success) {
+                console.log("THE DATA I RECIEVED", profileRes.data)
+                setUserData((prevUserData) => ({
+                  ...prevUserData,
+                  ...profileRes.data.user[0]
+                }));
+                setFormValues((prevFormValues) => ({
+                  ...prevFormValues,
+                  ...profileRes.data.user[0]
+                }))
+              } else {
+                navigate('/login')
+              }
       
+            } catch (err) {
+              console.error(err)
+            }
+          }
+          fetchData()
+        }
+    })
+    .catch(err=> console.log(err))
+  }, [])
+    
     return(
         <div >
             <Navbar/>
@@ -94,17 +145,17 @@ const ManageAcc = () => {
                     </div>
                     <h5>Languages that you speak:  </h5>  
                     <LanguageSelector 
-                    name="languagesspeak"
-                    selectedLanguages={selectedMotherTongues}
+                    name="languagespeak"
+                    selectedLanguages={SelectedMotherTongues}
                     setSelectedLanguages={setSelectedMotherTongues}
-                    api=""
+                    api="http://localhost:8081/languages/learning"
                     />  
                     <h5>Target Languages: </h5>  
                     <LanguageSelector
-                    name="languagestolearn"
-                    selectedLanguages={selectedLanguagesToLearn}
+                    name="languagetolearn"
+                    selectedLanguages={SelectedLanguagesToLearn}
                     setSelectedLanguages={setSelectedLanguagesToLearn}
-                    api=""
+                    api="http://localhost:8081/languages/toLearn"
                     /> 
                     <button type="submit" onClick={handleSave}>Save changes</button>
                 </form>)}
