@@ -11,8 +11,6 @@ const postInteractingRoutes = require("./routes/postInteractingRoutes")
 const commentRoutes = require("./routes/commentRoutes")
 const replyRoutes = require('./routes/replyRoutes')
 
-const authRoutes = require("./routes/authRoutes");
-const userRoutes = require("./routes/userRoutes");
 const postRoutes = require("./routes/postRoutes")
 
 const app = express();
@@ -31,6 +29,7 @@ app.use(cookieParser())
 app.use(bodyParser.json());
 
 app.use(session({
+  secret: 'secret',
   resave: false,
   saveUninitialized: false, // if it was true i will always get a cookie whenever i type anything
   cookie: {
