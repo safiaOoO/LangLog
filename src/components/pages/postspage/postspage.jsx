@@ -47,7 +47,7 @@ const Postspage = () => {
           <Post key={post.id} post={post} />
         ))}
       </div>
-      <div className="refresh"><button onClick={fetchPostsByLanguages}>Get new posts</button></div>
+      <div className="refresh"><button>Get new posts</button></div>
     </div>
   );
 };
