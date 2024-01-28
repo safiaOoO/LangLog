@@ -5,17 +5,25 @@ import Post from './post';
 import LanguageSelector from '../register/language'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { CiFilter } from "react-icons/ci";
+import { request } from 'express';
 
 const Postspage = () => {
   const [posts, setPosts] = useState([]);
+  const [selectedLanguage, setSelectedLanguage] = useState([]);
 
   useEffect(() => {
-    fetch('/post/getPostsPage') 
-      .then(response => response.json())
-      .then(data => setPosts(data))
-      .catch(error => console.error('Error fetching posts:', error));
+    fetchPostsByLanguages();
   }, []);
-  const [selectedLanguage, setSelectedLanguage] = useState([]);
+
+  const fetchPostsByLanguages = async () => {
+    try {
+      const response = await fetch(`http://localhost:8081/post/getPostsPage`);
+      const data = await response.json();
+      setPosts(data);
+    } catch (error) {
+      console.error('Error fetching posts:', error);
+    }
+  };
 
   return (
     <div>

@@ -13,6 +13,7 @@ import Follow from './follow';
 
 const Post = () => {
     const [postInfo, setPostInfo] = useState(null);
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
     const handlepostpage = () => {
         navigate('/postcontent');
@@ -21,14 +22,17 @@ const Post = () => {
     useEffect(() => {
         const fetchPostInformation = async () => {
             try {
-              const response = await axios.get('/post/getPostInfo')
-              const postData = response.data
-              setPostInfo(postData)
+                const response = await axios.get(`http://localhost:8081/post/getPostInfo/${idPost}`); 
+                const postData = response.data;
+                setPostInfo(postData);
+                setLoading(false);
             } catch (error) {
-              console.error('Error fetching post information:', error)
+                console.error('Error fetching post information:', error);
+                setLoading(false);
             }
-          }
-          fetchPostInformation()
+        }
+
+        fetchPostInformation();
     }, [])
 
   return (
