@@ -142,7 +142,11 @@ const postController = {
     getPostInfo: async (req, res) => {
         try {
             const postId = req.params.idPost
-            const sql = 'SELECT u.userName, u.profilePicturePath, p.title, p.description, v.CommentCount, v.LikeCount, v.SaveCount, (SELECT languageName FROM languages WHERE codeLanguage = p.codeLanguage) as language FROM users as u ,post as p ,poststats as v WHERE p.idPost = ? AND u.idUser = p.idUser AND v.idPost = p.idPost'
+            const sql = `SELECT u.userName, u.profilePicturePath, p.title, p.description, v.CommentCount, v.LikeCount, v.SaveCount
+                        ,(SELECT languageName FROM languages WHERE codeLanguage = p.codeLanguage) as language
+                        FROM users as u ,post as p ,poststats as v 
+                        WHERE p.idPost = ? AND u.idUser = p.idUser AND v.idPost = p.idPost`
+
             const result = await db.query(sql, [postId])
             const postInfo = result[0]
 
