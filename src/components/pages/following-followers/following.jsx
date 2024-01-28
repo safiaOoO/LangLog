@@ -1,9 +1,11 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { ProfilePic } from '../navbar/nav';
-import Follow from '../postspage/follow';
+import { ProfilePic } from '../navbar/nav'
+import Follow from '../postspage/follow'
 import './following.css'
+import { useNavigate } from 'react-router-dom';
 const Following = ({api}) => {
+    const navigate = useNavigate()
 
     const [users, setUsers] = useState([])
     const [userStats, setUserStats] = useState({ posts: 0, followers: 0 })
@@ -46,23 +48,22 @@ const Following = ({api}) => {
               {users.languages.map((language, index) => (
                 <div className="language" key={index}>{language}</div>
               ))}
-                </div> */}
+            </div> */}
+          </div>
+          <div className="third">
+            <div className="countpost">
+              <div className="number">{userStats.posts}</div>
+              <div className="posts">Posts</div>
             </div>
-            <div className="third">
-              <div className="countpost">
-                <div className="number">{userStats.posts}</div>
-                <div className="posts">Posts</div>
-              </div>
-              <div className="countfollow">
-                <div className="number">{userStats.followers}</div>
-                <div className="follow">Followers</div>
-              </div>
+            <div className="countfollow">
+              <div className="number">{userStats.followers}</div>
+              <div className="follow">Followers</div>
             </div>
           </div>
-        ))}
-      </div>
-    )
-  }
-  
-export default Following;
-  
+        </div>
+      ))}
+    </div>
+  )
+}
+
+export default Following
