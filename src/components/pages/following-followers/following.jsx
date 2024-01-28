@@ -2,8 +2,13 @@ import React, { useState, useEffect} from 'react';
 import { ProfilePic } from '../navbar/nav';
 import Follow from '../postspage/follow';
 import './following.css'
+import { useNavigate } from 'react-router-dom';
 const Following = () => {
+    const navigate = useNavigate()
 
+  const handlevisiteaccount = () => {
+    navigate('/acconut')
+  }
     const [users, setUsers] = useState([])
     const [userStats, setUserStats] = useState({ posts: 0, followers: 0 })
   
@@ -29,7 +34,7 @@ const Following = () => {
     }, [users]);
   
     return (
-      <div>
+      <div onClick={handlevisiteaccount}>
         {users.map(user => (
           <div className='user' key={user.id}>
             <div className='first'>
