@@ -7,8 +7,7 @@ import './myposts-saved.css';
 const MyPosts = () => {
   return (
     <div>
-      <Mypost />
-      <Mypost />
+      <Mypost api="http://localhost:8081/post/myPosts" />
     </div>
   );
 };
@@ -16,8 +15,7 @@ const MyPosts = () => {
 const SavedPosts = () => {
   return (
     <div>
-      <Post />
-      <Post />
+      <Post api="http://localhost:8081/post/mySavedPosts" />
     </div>
   );
 };

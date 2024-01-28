@@ -138,6 +138,20 @@ const postController = {
             res.status(500).json({ error: 'Internal Server Error' });
         }
     },
+    
+    getSavedPosts: async (req, res) => {
+        try {
+            const userId = req.session.idUser
+            const sql = 'SELECT posts.* FROM posts JOIN savedposts ON posts.id = savedposts.idPost WHERE savedposts.idUser = ?'
+            const posts = await db.query(sql, [userId])
+
+            res.json(posts)
+            
+        }catch (error) {
+            console.error('Error fetching posts:', error);
+            res.status(500).json({ error: 'Internal Server Error' });
+        }
+    },
 
     getPostInfo: async (req, res) => {
         try {

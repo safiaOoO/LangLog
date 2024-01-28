@@ -7,7 +7,8 @@ router.delete('/deletePost', PostController.deletePost)
 router.put('/editPost', PostController.editPost)
 router.get('/getPostInfo', PostController.getPostInfo)
 router.get('/getPostsPage', PostController.getUserPostPage)
-router.get('/myPots', PostController.getUserPost)
+router.get('/myPosts', PostController.getUserPost)
+router.get('/mySavedPosts', PostController.getSavedPosts)
 router.get('/filterSearch', PostController.searchByFilter)
 
 module.exports = router
