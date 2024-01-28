@@ -8,7 +8,7 @@ import { faMessage } from '@fortawesome/free-regular-svg-icons'
 import { ProfilePic } from '../navbar/nav'
 import './mypost.css'
 
-const Mypost = () => {
+const Mypost = (api) => {
   const [posts, setPosts] = useState([])
 
   const navigate = useNavigate()

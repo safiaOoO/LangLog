@@ -1,8 +1,9 @@
 import React, { useState, useEffect} from 'react';
+import axios from 'axios'
 import { ProfilePic } from '../navbar/nav';
 import Follow from '../postspage/follow';
 import './following.css'
-const Following = () => {
+const Following = ({api}) => {
 
     const [users, setUsers] = useState([])
     const [userStats, setUserStats] = useState({ posts: 0, followers: 0 })
