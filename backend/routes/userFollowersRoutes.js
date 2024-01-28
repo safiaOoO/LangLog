@@ -4,6 +4,6 @@ const userFollowerController = require('../controllers/userFollowersController')
 
 router.get('/:id/userStats', userFollowerController.getUserStats)
 router.get('/Followers', userFollowerController.getUserFollowers)
-router.get('/Followings', userFollowerController.getuserFollowings)
+router.get('/Followings', userFollowerController.getUserFollowings)
 
 module.exports = router

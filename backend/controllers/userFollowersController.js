@@ -26,7 +26,7 @@ userFollowerController = {
             res.status(500).json({error : 'Internal Server Error'})
         }
     },
-    getUserFollowers: async(req,res) => {
+    getUserFollowings: async(req,res) => {
         try {
             const userId = req.session.idUser 
             const sql = 'SELECT idFollowing FROM userFollowers WHERE idFollower = ?'
