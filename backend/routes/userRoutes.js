@@ -9,5 +9,6 @@ router.post("/unfollowUser", userController.unfollowUser)
 router.post('/updateProfile', userController.updateProfile)
 router.get('/getProfile',userController.getProfile)
 router.get('/checkFollow/:followingUserId',userController.checkFollow)
+router.get('/getUsernameProfilePic',userController.getUsernameProfilePic)
 
 module.exports = router

@@ -10,6 +10,21 @@ const userController = {
   }
   },
 
+  getUsernameProfilePic : (req,res) =>{
+    const sql = 'SELECT username, profilePicturePath FROM users WHERE idUser = ?'
+    if(req.session.userID){
+      db.query(sql,[req.session.userID],(err,data)=>{
+        if(err){
+          console.error("Error getting username and profile picture path:", err)
+          return res.json({ success: false, message: "Internal server error" })
+        }else{
+          console.log('iam here', data[0].username)
+          return res.json({success : true, username : data[0].username, profilePicturePath : data[0].profilePicturePath})
+        }
+      })
+    }
+  },
+
   followUser: (req,res)=>{
     const sqlFollow = 'INSERT INTO userfollowers (`idFollower`,`idFollowing`) VALUES (?)'
     const follower = req.session.userID

@@ -45,7 +45,6 @@ app.use("/languages", languagesRoutes)
 app.use('/posts', postInteractingRoutes)
 app.use('/comments', commentRoutes);
 app.use('/replies', replyRoutes);
-app.use("/user", userRoutes)
 app.use("/post", postRoutes)
 
 

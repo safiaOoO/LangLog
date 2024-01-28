@@ -1,6 +1,7 @@
 import React, { useState , useEffect } from 'react';
 import "./nav.css"
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const ProfilePic = ({ onClick }) => {
     const [imageSrc, setImageSrc] = useState('./images/profile.png'); 
@@ -18,8 +19,20 @@ const ProfilePic = ({ onClick }) => {
   };
   
 const Navbar = () => {
-  const [username, setUsername] = useState('User Name');
-  const [activeLink, setActiveLink] = useState(null);
+  const [username, setUsername] = useState('');
+  const [activeLink, setActiveLink] = useState(null);  
+  useEffect(() => {
+    axios.get('http://localhost:8081/getUsernameProfilePic')
+    .then(res => {
+        if(res.data.success === true){
+          setUsername(res.data.username)
+        }else{
+          alert(res.data.message)
+        }
+    })
+    .catch(err=> console.log(err))
+  }, []) 
+
   const navigate = useNavigate();
 
   const handleLinkClick = (index,event) => {
