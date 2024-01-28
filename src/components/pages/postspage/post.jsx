@@ -22,7 +22,7 @@ const Post = () => {
     useEffect(() => {
         const fetchPostInformation = async () => {
             try {
-                const response = await axios.get(`http://localhost:8081/post/getPostInfo/${idPost}`); 
+                const response = await axios.get(`http://localhost:8081/post/getPostInfo/${idPost}`);
                 const postData = response.data;
                 setPostInfo(postData);
                 setLoading(false);
@@ -33,7 +33,7 @@ const Post = () => {
         }
 
         fetchPostInformation();
-    }, [])
+    }, [idPost]);
 
   return (
     <div className='post' >
