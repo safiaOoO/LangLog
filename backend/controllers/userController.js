@@ -54,65 +54,80 @@ const userController = {
     })
   },
 
-  updateProfile : (req,res) => {
-    const userId = req.session.userID
-    const updatedData = req.body // the variable that safia will send
-    console.log(req.body)
+  updateProfile: (req, res) => {
+  const userId = req.session.userID
+  const updatedData = req.body
 
-    let values = [updatedData.username,updatedData.fullname,updatedData.bio,userId]        
+  const sqlUpdateUser = `UPDATE users SET username = ?, fullName = ?, bio = ? WHERE idUser = ?`
+  const sqlCheckUsername = 'SELECT * FROM users WHERE username = ? AND idUser != ?'
 
-    const sqlUpdateUser = `UPDATE users SET username = ?, fullName = ?, bio = ? WHERE idUser = ?`
-    const sqlCheckUsername = 'SELECT * FROM users WHERE username = ? AND idUser != ?'
+  db.query(sqlCheckUsername, [updatedData.username, userId], (err, data) => {
+    if (err) {
+      console.error("Error checking username:", err)
+      return res.json({ success: false, message: "Internal server error" })
+    }
 
-    db.query(sqlCheckUsername,[values.username,userId],(err,data)=>{
+    console.log(data)
+
+    if (data.length !== 0) {
+      return res.json({ success: false, message: "The username you entered already exists" })
+    }
+
+    const values = [updatedData.username, updatedData.fullname, updatedData.bio, userId]
+
+    db.query(sqlUpdateUser, values, (err) => {
       if (err) {
-        console.error("Error checking username:", err)
-        res.json({ success: false, message: "Internal server error" })
+        console.error("Error updating user's data:", err);
+        return res.json({ success: false, message: "Internal server error" })
       }
-
-      if(data.length>0){
-        return res.json({ success: false, message: "The username you entered already exists" })
-      }else{
-        db.query(sqlUpdateUser,values,(err)=>{
+      if (updatedData.languagetolearn.length > 0) {
+        const sqlToLearn = "INSERT INTO languagetolearn (`idUser`, `codeLanguage`) VALUES ?"
+        const languagestolearn = updatedData.languagetolearn
+        const languagestolearnValues = languagestolearn.map(language => [userId, language])
+        db.query(sqlToLearn, [languagestolearnValues], (err) => {
           if (err) {
-            console.error("Error getting user's data:", err)
-            res.json({ success: false, message: "Internal server error" })
-          }else{
-            if (updatedData.languagetolearn.length > 0){
-              const sqlToLearn = " INSERT INTO languagetolearn (`idUser`, `codeLanguage`) VALUES (?)"
-              const languagestolearn = updatedData.languagetolearn
-              const languagestolearnValues = languagestolearn.map(language => [userId, language])
-              console.log(languagestolearnValues)
-              db.query(sqlToLearn,languagestolearnValues,(err)=>{
-                if(err){
-                  console.error("Error inserting languages spoken:", err)
-                  res.json({ success: false, message: "Internal server error" })
-                }
-              })
-            }
-            if (updatedData.languagespeak.length > 0){
-              const sqlSpeak = " INSERT INTO languagespeak (`idUser`, `codeLanguage`) VALUES (?)"
-              const languagesspeak = updatedData.languagespeak
-              const languagesspeakValues = languagesspeak.map(language => [userId, language])
-              db.query(sqlSpeak,languagesspeakValues,(err)=>{
-                if(err){
-                  console.error("Error inserting languages to learn:", err)
-                  res.json({ success: false, message: "Internal server error" })
-                }else{
-                  console.log("success")
-                  res.json({ success: true})
-                }
-              })
-            }
+            console.error("Error inserting languages to learn:", err)
+            return res.json({ success: false, message: "Internal server error" })
+          }
+          if (updatedData.languagespeak.length > 0) {
+            const sqlSpeak = "INSERT INTO languagespeak (`idUser`, `codeLanguage`) VALUES ?"
+            const languagesspeak = updatedData.languagespeak
+            const languagesspeakValues = languagesspeak.map(language => [userId, language])
+            db.query(sqlSpeak, [languagesspeakValues], (err) => {
+              if (err) {
+                console.error("Error inserting languages spoken:", err)
+                return res.json({ success: false, message: "Internal server error" })
+              }
+              res.json({ success: true, message: "Updated successfully" })
+            });
+          } else {
+            res.json({ success: true, message: "Updated successfully" })
           }
         })
+      } else {
+        if (updatedData.languagespeak.length > 0) {
+          const sqlSpeak = "INSERT INTO languagespeak (`idUser`, `codeLanguage`) VALUES ?"
+          const languagesspeak = updatedData.languagespeak
+          const languagesspeakValues = languagesspeak.map(language => [userId, language])
+          db.query(sqlSpeak, [languagesspeakValues], (err) => {
+            if (err) {
+              console.error("Error inserting languages spoken:", err)
+              return res.json({ success: false, message: "Internal server error" })
+            }
+            res.json({ success: true, message: "Updated successfully" })
+          })
+        } else {
+          res.json({ success: true, message: "Updated successfully" })
+        }
       }
     })
-  },
+  })
+},
+
 
   getProfile : (req,res) => {
     const userId = req.session.userID
-    const sql = 'SELECT fullname, username, bio FROM users WHERE idUser = ?'
+    const sql = 'SELECT fullname, username, bio, profilePicturePath FROM users WHERE idUser = ?'
     const sqlLearning = 'SELECT GROUP_CONCAT(languages.languageName) AS languageNames FROM languagetolearn JOIN languages ON languagetolearn.codeLanguage = languages.codeLanguage WHERE languagetolearn.idUser = ?'
     const sqlSpeaking = 'SELECT GROUP_CONCAT(languages.languageName) AS languageNames FROM languagespeak JOIN languages ON languagespeak.codeLanguage = languages.codeLanguage WHERE languagespeak.idUser = ?'
 
