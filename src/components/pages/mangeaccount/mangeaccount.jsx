@@ -37,21 +37,30 @@ const ManageAcc = () => {
     setFormValues({ ...formValues, [name]: value });
   };
 
-  const handleSave = () => {
-    setFormValues(formValues);
-    setIsEditing(false);
-    const values = {
-      ...formValues,
-      languagetolearn: SelectedLanguagesToLearn,
-      languagespeak: SelectedMotherTongues,
-    };
-    console.log(formValues);
-    window.location.reload();
-    axios.post('http://localhost:8081/updateProfile',values)
-    .then(res=>{
-      navigate('/manageaccount')
-    })
-    .catch(err=>console.log(err))
+  const handleSave = async () => {
+    try {
+      setFormValues(formValues);
+      setIsEditing(false);
+      const values = {
+        ...formValues,
+        languagetolearn: SelectedLanguagesToLearn,
+        languagespeak: SelectedMotherTongues,
+      };
+  
+      const response = await axios.post('http://localhost:8081/updateProfile', values);
+      
+      console.log(response.data.success);
+  
+      if (response.data.success) {
+        alert(response.data.message);
+        window.location.href = window.location.href;
+      } else {
+        alert(response.data.message);
+        window.location.href = window.location.href;
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   axios.defaults.withCredentials = true
@@ -66,7 +75,6 @@ const ManageAcc = () => {
             try {
               const profileRes = await axios.get('http://localhost:8081/getProfile')
               if (profileRes.data.success) {
-                console.log("THE DATA I RECIEVED", profileRes.data)
                 setUserData((prevUserData) => ({
                   ...prevUserData,
                   ...profileRes.data.user[0]
@@ -88,7 +96,6 @@ const ManageAcc = () => {
     })
     .catch(err=> console.log(err))
   }, [])
-    
     return(
         <div >
             <Navbar/>
@@ -109,7 +116,7 @@ const ManageAcc = () => {
                  </div>
                  </div>
                  {isEditing && (
-                <form >
+                <form action = "" onSubmit={handleSave}>
                     <h2>Edit Profile</h2>
                     <div className="input-group">
                         <input
@@ -158,7 +165,7 @@ const ManageAcc = () => {
                     setSelectedLanguages={setSelectedLanguagesToLearn}
                     api="http://localhost:8081/languages/toLearn"
                     /> 
-                    <button type="submit" onClick={handleSave}>Save changes</button>
+                    <button type="submit">Save changes</button>
                 </form>)}
             </div>
             
@@ -166,5 +173,4 @@ const ManageAcc = () => {
         </div>
     );
 }
-
 export default ManageAcc;
