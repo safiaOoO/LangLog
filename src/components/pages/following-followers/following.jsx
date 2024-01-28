@@ -4,6 +4,7 @@ import { ProfilePic } from '../navbar/nav'
 import Follow from '../postspage/follow'
 import './following.css'
 import { useNavigate } from 'react-router-dom';
+
 const Following = ({api}) => {
     const navigate = useNavigate()
 
