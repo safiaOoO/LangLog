@@ -46,6 +46,7 @@ const ManageAcc = () => {
       languagespeak: SelectedMotherTongues,
     };
     console.log(formValues);
+    window.location.reload();
     axios.post('http://localhost:8081/updateProfile',values)
     .then(res=>{
       navigate('/manageaccount')
