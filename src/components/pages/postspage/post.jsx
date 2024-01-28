@@ -40,7 +40,6 @@ const Post = () => {
         <div className='first'>
             <ProfilePic/>
             <div>{postInfo.userName}</div>
-            <Follow/>
         </div>
         <div className="second">
             <div className="postcontent" onClick={handlepostpage}>

@@ -7,7 +7,9 @@ import { useNavigate } from 'react-router-dom';
 
 const Following = ({api}) => {
     const navigate = useNavigate()
-
+    const handlevisiteaccount=()=>{
+        navigate('/account')
+    }
     const [users, setUsers] = useState([])
     const [userStats, setUserStats] = useState({ posts: 0, followers: 0 })
   
@@ -33,12 +35,11 @@ const Following = ({api}) => {
     }, [users]);
   
     return (
-      <div>
+      <div onClick={handlevisiteaccount}>
         {users.map(user => (
           <div className='user' key={user.id}>
             <div className='first'>
               <ProfilePic /> 
-              <Follow />
             </div>
             <div className="second">
               <div className="userinfo">
