@@ -16,6 +16,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Postform from './components/pages/createpost/createpost';
+import Account from './components/pages/visiteaccount/visiteaccount';
 
 
 function App(){
@@ -64,6 +65,10 @@ function App(){
      {
       path: "/errorpage",
       element: <Error/>,
+     },
+     {
+      path: "/account",
+      element: <Account/>,
      },
   ]);
 

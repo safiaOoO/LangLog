@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap');
+*{
+    font-family: 'Lora', serif;
+}
+body{
+    background-color: #FBF6F0;
+}
+.account{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 80px;
+}
+
+.account .infoscard{
+    display: flex;
+    width: 800px;
+    height: 220px;
+    border-radius: 30px;
+    background: white;
+    justify-content: space-around;
+    margin-top: 50px;
+}
+.account .infos{
+    width: 80%;
+    padding-top: 18px;
+}
+.account .info{
+    margin-top: 10px;
+}
+.account .info span{
+    font-size: 18px;
+    font-weight: 800;
+}
+.account .pic{
+    width: 10%;
+    margin-left: 20px;
+    padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.account .follow{
+    background-color: #739072;
+    color: hsl(0, 0%, 100%);
+    font-size: 20px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 20px;
+    width: 100px;
+    cursor: pointer;
+}
+.account .follow:hover{
+    background-color: #4d604e;
+}
