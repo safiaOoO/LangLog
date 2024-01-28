@@ -1,17 +1,33 @@
 const db = require("../config/db")
 const path = require("path")
 const fs = require('fs')
+const CircularJSON = require('circular-json');
+const getLanguageCode = async (codeLanguage) =>{
+    try{
+        const SQL = 'SELECT languageName FROM languages WHERE codeLanguage = ?'
+        const result = await db.query(SQL, [codeLanguage]) ;
+        return result
+    } catch {
+        console.error('Error conveting language code', error);
+        throw error;
+    }
+}
 const getUserLanguages = async (userId) => {
-    const speakQuery = 'SELECT codeLanguage FROM languagespeak WHERE idUser = ?'
-    const learnQuery = 'SELECT codeLanguage FROM languagetolearn WHERE idUser = ?'
-  
-    const [speakResult] = await db.query(speakQuery, [userId])
-    const [learnResult] = await db.query(learnQuery, [userId])
-  
-    const spokenLanguages = speakResult.map(row => row.codeLanguage)
-    const learningLanguages = learnResult.map(row => row.codeLanguage)
-  
-    return { spokenLanguages, learningLanguages }
+    try {
+        const speakQuery = 'SELECT codeLanguage FROM languagespeak WHERE idUser = ?'
+        const learnQuery = 'SELECT codeLanguage FROM languagetolearn WHERE idUser = ?'
+      
+        const [speakResult] = await db.query(speakQuery, [userId]) || [];
+        const [learnResult] = await db.query(learnQuery, [userId]) || [];
+      
+        const spokenLanguages = speakResult.map(row => row.codeLanguage);
+        const learningLanguages = learnResult.map(row => row.codeLanguage);
+      
+        return { spokenLanguages, learningLanguages };
+    } catch (error) {
+        console.error('Error fetching user languages:', error);
+        throw error; // Propagate the error for higher-level handling
+    }
 }
 
 const getPostsByLanguages = async (userId) => {
@@ -41,7 +57,9 @@ const getPostsByLanguages = async (userId) => {
 const postController = {
     createPost: async (req, res) => {
         try {
-            const sql = "INSERT INTO post (title, description, content, picturePath, category, codeLanguage, idUser) VALUES (?, ?, ?, ?, ?, ?, ?)"
+            const sql = "INSERT INTO post \
+                        (title, description, content, picturePath, category, codeLanguage, idUser) \
+                         VALUES (?, ?, ?, ?, ?, ?, ?)"
             let picturePath
     
             if (req.file) {
@@ -53,7 +71,7 @@ const postController = {
     
             const { title, description, content, category, codeLanguage } = req.body
             console.log('the title is: ', title, 'the description is: ', description, 'the content is: ', content, 'the category is : ', category, ' the codelanguage is: ', codeLanguage)
-            const userId = req.session.userId
+            const userId = req.body.idUser
             console.log('userId: ', userId)
     
             const result = await db.query(sql, [title, description, content, picturePath, category, codeLanguage, userId])
@@ -92,12 +110,11 @@ const postController = {
     editPost: async (req, res) => {
         try {
             const sql = `UPDATE post 
-                         SET title = ?, description = ? , category = ?, codeLanguage = ?
+                         SET title = ?, description = ? , category = ?, codeLanguage = ?, content = ?
                          WHERE idPost = ? `
-            const postId = req.params.idPost 
-            const {title, description, content, category, languageName} = req.body
-            const codeLanguage = await getLanguageCode(languageName)
-            const result = await db.query(sql, [title, description, content, category, codeLanguage, postId])
+
+            const {title, description, content, category, idPost} = req.body
+            const result = await db.query(sql, [title, description, content, category, , idPost])
 
             if (result.affectedRows === 0) {
                 return res.status(404).json({ error: 'Post not found' })
@@ -113,7 +130,7 @@ const postController = {
 
     getUserPostPage: async (req, res) => {
         try {
-            const userId = req.session.idUser; 
+            const userId = req.body.idUser; 
             const userLanguages = await getUserLanguages(userId); 
             const posts = await getPostsByLanguages(userLanguages);
             
@@ -127,9 +144,9 @@ const postController = {
 
     getUserPost: async (req, res) => {
         try {
-            const userId = req.session.idUser
-            const sql = 'SELECT * FROM post WHERE idUser = ? '
-            const posts = await db.query(sql, [userId])
+            const postId = req.body.idPost
+            const sql = 'SELECT * FROM post WHERE idPost = ? '
+            const posts = await db.query(sql, [postId])
 
             res.json(posts)
             
@@ -141,7 +158,7 @@ const postController = {
     
     getSavedPosts: async (req, res) => {
         try {
-            const userId = req.session.idUser
+            const userId = req.body.idUser
             const sql = 'SELECT posts.* FROM posts JOIN savedposts ON posts.id = savedposts.idPost WHERE savedposts.idUser = ?'
             const posts = await db.query(sql, [userId])
 
@@ -155,7 +172,7 @@ const postController = {
 
     getPostInfo: async (req, res) => {
         try {
-            const postId = req.params.idPost
+            const postId = req.body.idPost
             const sql = `SELECT u.userName, u.profilePicturePath, p.title, p.description, v.CommentCount, v.LikeCount, v.SaveCount
                         ,(SELECT languageName FROM languages WHERE codeLanguage = p.codeLanguage) as language
                         FROM users as u ,post as p ,poststats as v 
