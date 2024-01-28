@@ -35,7 +35,7 @@
     background-color: #FFFFFF;
     border-radius: 30px;
     width: 250px;
-    height: 220px;
+    height: 270px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -53,4 +53,9 @@
     align-items: center;
     cursor: pointer;
     font-size: 14px;
+}
+.dropdown-content .link button{
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
 }
