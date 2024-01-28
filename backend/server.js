@@ -12,6 +12,7 @@ const commentRoutes = require("./routes/commentRoutes")
 const replyRoutes = require('./routes/replyRoutes')
 
 const postRoutes = require("./routes/postRoutes")
+const userFollowRoutes = require("./routes/userFollowersRoutes")
 
 const app = express();
 app.use(express.json());
@@ -46,6 +47,7 @@ app.use('/posts', postInteractingRoutes)
 app.use('/comments', commentRoutes);
 app.use('/replies', replyRoutes);
 app.use("/post", postRoutes)
+app.use("/user",userFollowRoutes)
 
 
 app.listen(PORT, () => {

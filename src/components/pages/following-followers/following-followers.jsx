@@ -3,11 +3,13 @@ import { Navbar } from '../navbar/nav';
 import './following-followers.css';
 import Following from './following';
 const Followings = () => {
+
+
+  
+
   return (
     <div>
-      <Following />
-      <Following />
-      <Following />
+      <Following api="http://localhost:8081/user/Followers"/>
     </div>
   );
 };
@@ -15,8 +17,7 @@ const Followings = () => {
 const Followers = () => {
   return (
     <div>
-        <Following />
-        <Following />
+      <Following api="http://localhost:8081/user/Followings"/>
     </div>
   );
 };

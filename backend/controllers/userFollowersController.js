@@ -3,7 +3,7 @@ const db = require("../config/db")
 userFollowerController = {
     getUserStats: async (req, res) => {
         try {
-            const userId = req.session.idUser
+            const userId = req.params.id
             const sql = 'SELECT numOfPosts, numOfFollowers, numOfFollowings from userstats where idUser = ?'
             const result = await db.query(sql, [userId])
 
