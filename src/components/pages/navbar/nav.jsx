@@ -112,6 +112,7 @@ const Navbar = () => {
           <div className='link' onClick={handleManageAccount}>Manage your account</div>
           <div className='link' onClick={handlePosts}>My posts / Saved posts</div>
           <div className='link' onClick={handleFollowingFollowers}>following / followers</div>
+          <div className='link'><button>Log out</button></div>
         </div>
       )}
     </div>
